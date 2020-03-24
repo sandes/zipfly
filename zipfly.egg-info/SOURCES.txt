@@ -1,0 +1,9 @@
+README.md
+setup.cfg
+setup.py
+zipfly/__init__.py
+zipfly/compat.py
+zipfly.egg-info/PKG-INFO
+zipfly.egg-info/SOURCES.txt
+zipfly.egg-info/dependency_links.txt
+zipfly.egg-info/top_level.txt

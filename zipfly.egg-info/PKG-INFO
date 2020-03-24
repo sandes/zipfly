@@ -1,0 +1,22 @@
+Metadata-Version: 1.1
+Name: zipfly
+Version: 1.0
+Summary: ZipFly
+Home-page: http://github.com/buzonIO/zipfly
+Author: Buzon
+Author-email: support@buzon.io
+License: UNKNOWN
+Download-URL: https://github.com/BuzonIO/zipfly/archive/v1.0.tar.gz
+Description: UNKNOWN
+Keywords: zipfly,buzon
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
