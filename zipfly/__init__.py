@@ -49,7 +49,7 @@ def _get_compressor(compress_type):
 class PointerIO(object):
     def __init__(self, mode='wb'):
         if mode not in ('wb', ):
-            raise RuntimeError('zipstream.ZipFile() requires mode "wb"')
+            raise RuntimeError('zipfly.ZipFile() requires mode "wb"')
         self.data_pointer = 0
         self.__mode = mode
         self.__closed = False
@@ -168,7 +168,7 @@ class ZipFile(zipfile.ZipFile):
     def __init__(self, fileobj=None, mode='w', compression=ZIP_STORED, allowZip64=False):
         """Open the ZIP file with mode write "w"."""
         if mode not in ('w', ):
-            raise RuntimeError('zipstream.ZipFile() requires mode "w"')
+            raise RuntimeError('zipfly.ZipFile() requires mode "w"')
         if fileobj is None:
             fileobj = PointerIO()
 
