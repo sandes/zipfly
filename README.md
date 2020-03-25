@@ -5,7 +5,7 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
 
 
 # Install
-    pip install zipfly
+    pip install zipfly==1.1.3
 
 # Basic usage
 

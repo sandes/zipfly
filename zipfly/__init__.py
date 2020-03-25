@@ -6,7 +6,7 @@ Derived directly from zipfile.py
 """
 from __future__ import unicode_literals, print_function, with_statement
 
-__version__ = '1.1.2'
+__version__ = '1.1.3'
 
 from zipfile import (
     ZIP_STORED,
