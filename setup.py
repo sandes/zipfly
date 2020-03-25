@@ -4,7 +4,7 @@ import os
 
 
 CURRENT_PYTHON = sys.version_info[:2]
-REQUIRED_PYTHON = (2,7)
+REQUIRED_PYTHON = (3,5)
 
 # This check and everything above must remain compatible with Python 2.7.
 if CURRENT_PYTHON < REQUIRED_PYTHON:
@@ -35,8 +35,6 @@ setup(
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Build Tools',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
