@@ -6,7 +6,7 @@ Derived directly from zipfile.py
 """
 from __future__ import unicode_literals, print_function, with_statement
 
-__version__ = '1.1.3'
+__version__ = '1.1.4'
 
 from zipfile import (
     ZIP_STORED,
@@ -27,6 +27,7 @@ from zipfile import ZipFile, ZipInfo
 class Stream(RawIOBase):
     def __init__(self):
         self._buffer = b''
+        self._size=0
 
     def writable(self):
         return True
@@ -40,7 +41,11 @@ class Stream(RawIOBase):
     def get(self):
         chunk = self._buffer
         self._buffer = b''
+        self._size += len(chunk)
         return chunk
+
+    def size(self):
+        return self._size
 
 
 class ZipFly:
@@ -73,6 +78,12 @@ class ZipFly:
 
         return get_chunk()
 
+    def buffer_size(self):
+
+        # using to get the buffer size
+        # this size is different from the size of each file added
+        
+        return self._buffer_size
   
     def generator(self):
 
@@ -96,5 +107,6 @@ class ZipFly:
 
             zf.comment = self.comment
 
-        # ZipFile was closed.
         yield stream.get()
+        self._buffer_size = stream.size()
+        stream.close()
