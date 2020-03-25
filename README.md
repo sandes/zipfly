@@ -20,10 +20,10 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
     ]
 
     # write a file in disk
-    zf = zipfly.ZipFly(paths=paths)
+    zfly = zipfly.ZipFly(paths=paths)
 
     with open("test.zip", "wb") as f:
-        for i in zf.generator():
+        for i in zfly.generator():
             f.write(i)
 
 ```
@@ -44,17 +44,16 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
         },      
     ]
 
-    zipfly = ZipFly(paths=paths)
+    zfly = zipfly.ZipFly(paths=paths)
     
-    
+
     # IMPORTANT: getting the buffer size is optional
-    for i in zipfly.generator():
-        pass
-    buffer_size = zipfly.buffer_size()
+    for i in zfly.generator(): pass
+    buffer_size = zfly.buffer_size()
 
 
     # new generator to streaming
-    z = zipfly.generator()
+    z = zfly.generator()
 
     response = StreamingHttpResponse(
        z, content_type='application/octet-stream'
