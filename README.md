@@ -5,20 +5,26 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
 
 
 # Install
-    pip install zipfly==1.1.3
+    pip install zipfly==1.1.4
 
 # Basic usage
 
 ```python
     import zipfly
         
-    zf = zipfly.ZipFly()
+    paths = [ 
+        {
+            'filesystem': 'file1.mp4', # in your disk
+            'name': 'file1.mp4', # in zip file generated
+        },        
+    ]
 
-    # set comment
-    zf.set_comment("my comment")
+    # write a file in disk
+    zf = zipfly.ZipFly(paths=paths)
 
-    # get zip generator
-    zf.generator()
+    with open("test.zip", "wb") as f:
+        for i in zf.generator():
+            f.write(i)
 
 ```
 
@@ -33,27 +39,28 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
 
     paths = [
         {
-            'filesystem': '/path/to/your/file1.mp4',
-            'name': '/name/in/zip/file/file1.mp4', 
-        },
-
-        {
-            'filesystem': '/path/to/your/file2.mp4',
-            'name': '/name/in/zip/file/file2.mp4', 
-        },        
-
+            'filesystem': 'file1.mp4', # in your disk
+            'name': 'file1.mp4', # in zip file generated
+        },      
     ]
 
-    # paths is a list of maps
-        
-    zf = zipfly.ZipFly(paths=paths)
-    z = zf.generator()
+    zipfly = ZipFly(paths=paths)
+    
+    
+    # IMPORTANT: get the buffer's size is optional
+    for i in zipfly.generator():
+        pass
+    buffer_size = zipfly.buffer_size()
 
+
+    # new generator to streaming
+    z = zipfly.generator()
 
     response = StreamingHttpResponse(
        z, content_type='application/octet-stream'
     )          
-
+    
+    response['Content-Length'] = buffer_size
     response['Transfer-Encoding'] = 'chunked'
 
     return response 
