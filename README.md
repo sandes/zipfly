@@ -12,7 +12,7 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
 ```python
     import zipfly
         
-    zipfly = ZipFly()
+    zipfly = zipfly.ZipFly()
 
     # set comment
     zipfly.set_comment("my comment")
@@ -29,6 +29,7 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
 ```python
     
     from django.http import StreamingHttpResponse
+    import zipfly
 
     paths = [
         {
@@ -45,7 +46,7 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
 
     # paths is a list of maps
         
-    zipfly = ZipFly(paths=paths)
+    zipfly = zipfly.ZipFly(paths=paths)
     z = zipfly.generator()
 
 
@@ -54,7 +55,7 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
     )          
 
     response['Transfer-Encoding'] = 'chunked'
-    
+
     return response 
 ```
 
