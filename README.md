@@ -12,13 +12,13 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
 ```python
     import zipfly
         
-    zipfly = zipfly.ZipFly()
+    zf = zipfly.ZipFly()
 
     # set comment
-    zipfly.set_comment("my comment")
+    zf.set_comment("my comment")
 
     # get zip generator
-    zipfly.generator()
+    zf.generator()
 
 ```
 
