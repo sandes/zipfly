@@ -38,8 +38,8 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
         },
 
         {
-            'filesystem': '/path/to/your/file1.mp4',
-            'name': '/name/in/zip/file/file1.mp4', 
+            'filesystem': '/path/to/your/file2.mp4',
+            'name': '/name/in/zip/file/file2.mp4', 
         },        
 
     ]
