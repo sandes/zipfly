@@ -47,7 +47,7 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
     zipfly = ZipFly(paths=paths)
     
     
-    # IMPORTANT: get the buffer's size is optional
+    # IMPORTANT: getting the buffer size is optional
     for i in zipfly.generator():
         pass
     buffer_size = zipfly.buffer_size()
