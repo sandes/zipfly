@@ -11,11 +11,12 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
 
 ```python
     import zipfly
-        
+    
+    # `filesystem` and `name` keys are required.
     paths = [ 
         {
-            'filesystem': 'file1.mp4', # in your disk
-            'name': 'file1.mp4', # in zip file generated
+            'filesystem': 'file.mp4', # From your disk
+            'name': 'folder/file.mp4', # This is how it will appear in the zip file
         },        
     ]
 
@@ -37,10 +38,12 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
     from django.http import StreamingHttpResponse
     import zipfly
 
+
+    # `filesystem` and `name` keys are required.
     paths = [
         {
-            'filesystem': 'file1.mp4', # in your disk
-            'name': 'file1.mp4', # in zip file generated
+            'filesystem': 'file.mp4', # From your disk
+            'name': 'folder/file.mp4', # This is how it will appear in the zip file
         },      
     ]
 
