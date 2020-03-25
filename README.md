@@ -7,28 +7,60 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
 # Install
     pip install zipfly
 
-# Usage
+# Basic usage
 
 ```python
-    from zipfile import ZIP_DEFLATED
     import zipfly
+        
+    zipfly = ZipFly()
 
-    filelist = [
-        "/to/path/large-file1.mp4",
-        "/to/path/large-file2.mp4",
-    ]
+    # set comment
+    zipfly.set_comment("my comment")
 
-    z = zipfly.ZipFile( mode='w',
-                        compression=ZIP_DEFLATED, 
-                        allowZip64=True)
-    for f in filelist:
-        # get filename and write
-        filename = os.path.basename(os.path.normpath(f))
-        z.write(f, filename)
+    # get zip generator
+    zipfly.generator()
+
 ```
 
+## Examples
+
+### django
+
+```python
+    
+    from django.http import StreamingHttpResponse
+
+    paths = [
+        {
+            'filesystem': '/path/to/your/file1.mp4',
+            'name': '/name/in/zip/file/file1.mp4', 
+        },
+
+        {
+            'filesystem': '/path/to/your/file1.mp4',
+            'name': '/name/in/zip/file/file1.mp4', 
+        },        
+
+    ]
+
+    # paths is a list of maps
+        
+    zipfly = ZipFly(paths=paths)
+    z = zipfly.generator()
+
+
+    response = StreamingHttpResponse(
+       z, content_type='application/octet-stream'
+    )          
+
+    response['Transfer-Encoding'] = 'chunked'
+    
+    return response 
+```
+
+
 # Requirements
-Python > 2.7
+Python > 3.5
 
 # License
 This library was created by Buzon.io and is released under the MIT. Copyright 2019 Grow HQ, Inc.
