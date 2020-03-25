@@ -46,8 +46,8 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
 
     # paths is a list of maps
         
-    zipfly = zipfly.ZipFly(paths=paths)
-    z = zipfly.generator()
+    zf = zipfly.ZipFly(paths=paths)
+    z = zf.generator()
 
 
     response = StreamingHttpResponse(
