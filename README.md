@@ -20,9 +20,9 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
         },        
     ]
 
-    # write a file in disk
     zfly = zipfly.ZipFly(paths=paths)
 
+    # write a file in disk
     with open("test.zip", "wb") as f:
         for i in zfly.generator():
             f.write(i)
