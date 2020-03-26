@@ -50,9 +50,8 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
     zfly = zipfly.ZipFly(paths=paths)
     
 
-    # IMPORTANT: getting the buffer size is optional
-    for i in zfly.generator(): pass
-    buffer_size = zfly.buffer_size()
+    # IMPORTANT: buffer size is not required
+    buffer_size = zfly.buffer_size() # no multicore.
 
 
     # new generator to streaming
