@@ -6,7 +6,7 @@ Derived directly from zipfile.py
 """
 from __future__ import unicode_literals, print_function, with_statement
 
-__version__ = '1.1.4'
+__version__ = '1.1.5'
 
 from zipfile import (
     ZIP_STORED,
@@ -77,21 +77,38 @@ class ZipFly:
             return entry.read(1024 * self.chunksize)
 
         return get_chunk()
+       
+
+    def get_size(self):
+        
+        return self._buffer_size
+
 
     def buffer_size(self):
 
         # using to get the buffer size
         # this size is different from the size of each file added
-        
+
+        for i in self.generator(): pass
         return self._buffer_size
+
   
     def generator(self):
+
+        """
+        @ from_file classemthod of ZipFile->ZipInfo
+
+        filename should be the path to a file or directory on the filesystem.
+        arcname is the name which it will have within the archive (by default,
+        this will be the same as filename, but without a drive letter and with
+        leading path separators removed).
+        """           
 
         stream = Stream()
         
         with ZipFile(stream, mode='w', ) as zf:
 
-            for path in self.paths:
+            for path in self.paths:             
 
                 z_info = ZipInfo.from_file(path['filesystem'], path['name'])
 
@@ -110,3 +127,6 @@ class ZipFly:
         yield stream.get()
         self._buffer_size = stream.size()
         stream.close()
+
+
+    # close stream
