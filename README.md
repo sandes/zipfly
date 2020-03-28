@@ -47,11 +47,11 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
         },      
     ]
 
-    zfly = zipfly.ZipFly(paths=paths)
+    zfly = zipfly.ZipFly(mode='w', paths=paths, chunksize=8)
     
 
     # IMPORTANT: buffer size is not required
-    buffer_size = zfly.buffer_size() # no multicore.
+    buffer_size = zfly.buffer_size()
 
 
     # new generator to streaming
