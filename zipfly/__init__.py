@@ -6,7 +6,7 @@ Derived directly from zipfile.py
 """
 from __future__ import unicode_literals, print_function, with_statement
 
-__version__ = '1.1.5'
+__version__ = '1.1.6'
 
 from zipfile import (
     ZIP_STORED,
@@ -54,7 +54,7 @@ class ZipFly:
         
         """
             @param store size : int : size of all files 
-            in paths without compress
+            in paths without compression
           
         """ 
 
