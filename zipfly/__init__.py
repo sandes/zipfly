@@ -50,14 +50,21 @@ class Stream(RawIOBase):
 
 class ZipFly:
 
-    def __init__(self, mode='w', paths=None, chunksize=16):
+    def __init__(self, mode='w', paths=None, chunksize=16, store_size=0):
         
+        """
+            @param store size : int : size of all files 
+            in paths without compress
+          
+        """ 
+
         if mode not in ('w',):
             raise RunTimeError("requires mode w")
 
         self.comment = b'Written using Buzon-ZipFly'
         self.paths = paths
         self.chunksize = chunksize
+        self.store_size = store_size
 
     def set_comment(self, comment):
 
@@ -92,6 +99,42 @@ class ZipFly:
         for i in self.generator(): pass
         return self._buffer_size
 
+    def buffer_prediction_size(self):
+
+        """
+            @CONSTANTS : bytes
+            142, 48 : initial zipfile size             
+
+        """
+        LEN_PATHS = len( self.paths )
+        LEN_UTF8 = 2 * LEN_PATHS
+        LEN_INITIAL_ZIPFILE_ONE = 142 * LEN_PATHS
+        LEN_INITIAL_ZIPFILE_MULTIPLE = 48 * ( LEN_PATHS -1 )
+
+
+        def string_size_in_bytes(filename):
+            
+            # encode to utf-8 and get string's size
+            """ python3 zipfile
+            """         
+
+            filename_size = 0
+            for character in filename:
+                filename_size += len(character.encode('utf-8')) * 2 
+            
+            # bytes size
+            return filename_size 
+        
+        paths_filename_bytes_size=0
+        for path in self.paths:
+            paths_filename_bytes_size += string_size_in_bytes(path['name'])
+
+        prediction_size = self.store_size + \
+                          ( LEN_INITIAL_ZIPFILE_ONE ) - \
+                          ( LEN_INITIAL_ZIPFILE_MULTIPLE ) + \
+                          ( paths_filename_bytes_size - LEN_UTF8 )
+
+        return prediction_size
   
     def generator(self):
 
