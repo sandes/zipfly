@@ -35,7 +35,7 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
 
 ```python
 
-    from django.http import StreamingHttpResponse
+    import os
     import zipfly
 
 
