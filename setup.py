@@ -13,7 +13,7 @@ if CURRENT_PYTHON < REQUIRED_PYTHON:
         ==========================
         Unsupported Python version
         ==========================
-        This version of ZipStreaming requires Python {}.{}, but you're trying to
+        This version of ZipFly requires Python {}.{}, but you're trying to
         install it on Python {}.{}.
         This may be because you are using a version of pip that doesn't
         understand the python_requires classifier""".format(*(REQUIRED_PYTHON + CURRENT_PYTHON)))
