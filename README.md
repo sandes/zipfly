@@ -31,7 +31,7 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
 
 ## Examples
 
-### Get size of the zipfile
+### Get zipfile's size
 
 ```python
 
@@ -50,11 +50,12 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
     files_size = 0
     for path in paths:
         f = open(path['filesystem'],'rb')
-        files_size += os.fstat(f.fileno()).st_size
+        files_size += os.fstat(f.fileno()).st_size 
 
     zfly = zipfly.ZipFly(paths=paths, store_size=files_size)
 
-    final_zip_file_size = zf.buffer_prediction_size()
+    # total file-zip's size
+    print ( zfly.buffer_prediction_size() )
 
 
 ```
@@ -67,7 +68,6 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
     from django.http import StreamingHttpResponse
     import zipfly
 
-
     # `filesystem` and `name` keys are required.
     paths = [
         {
@@ -76,24 +76,11 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
         },      
     ]
 
-    zfly = zipfly.ZipFly(mode='w', paths=paths, chunksize=8)
+    zfly = zipfly.ZipFly(mode='w', paths=paths)
     
-
-    # IMPORTANT: 
-    # use buffer_prediction_size() for best performance
-
-    buffer_size = zfly.buffer_size()
-
-
-    # new generator to streaming
-    z = zfly.generator()
-
     response = StreamingHttpResponse(
-       z, content_type='application/octet-stream'
+       zfly.generator(), content_type='application/octet-stream'
     )          
-    
-    response['Content-Length'] = buffer_size
-    response['Transfer-Encoding'] = 'chunked'
 
     return response 
 ```
