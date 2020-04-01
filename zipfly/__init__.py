@@ -64,7 +64,7 @@ class ZipFly:
         self.comment = b'Written using Buzon-ZipFly'
         self.paths = paths
         self.chunksize = chunksize
-        self.store_size = store_size
+        self.store_size = int(store_size)
 
     def set_comment(self, comment):
 
