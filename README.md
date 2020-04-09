@@ -38,19 +38,13 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
     import os
     import zipfly
 
+    """
+    GET FILE SIZE IN PATHS
 
-    # `filesystem` and `name` keys are required.
-    paths = [
-        {
-            'filesystem': 'file.mp4', # From your disk
-            'name': 'folder/file.mp4', # This is how it will appear in the zip file
-        },      
-    ]
+    f = open(path['filesystem'],'rb')
+    files_size = os.fstat(f.fileno()).st_size
 
-    files_size = 0
-    for path in paths:
-        f = open(path['filesystem'],'rb')
-        files_size += os.fstat(f.fileno()).st_size 
+    """
 
     zfly = zipfly.ZipFly(paths=paths, store_size=files_size)
 
@@ -68,18 +62,14 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
     from django.http import StreamingHttpResponse
     import zipfly
 
-    # `filesystem` and `name` keys are required.
-    paths = [
-        {
-            'filesystem': 'file.mp4', # From your disk
-            'name': 'folder/file.mp4', # This is how it will appear in the zip file
-        },      
-    ]
 
     zfly = zipfly.ZipFly(mode='w', paths=paths)
     
+    # create generator by chunks
+    z =  zfly.generator()
+
     response = StreamingHttpResponse(
-       zfly.generator(), content_type='application/octet-stream'
+        z, content_type='application/octet-stream'
     )          
 
     return response 
