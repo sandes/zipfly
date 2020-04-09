@@ -40,8 +40,6 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
 ### Get zipfile's size
 
 ```python
-
-    import os
     import zipfly
     
     files_size_in_bytes = 9000000 # file.mp4 + background.jpg
