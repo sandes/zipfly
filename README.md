@@ -12,12 +12,18 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
 ```python
     import zipfly
     
-    # `filesystem` and `name` keys are required.
+    # key : filesystem -> path from your disk
+    # key : name -> This is how it will appear in the zip file\
+
     paths = [ 
         {
-            'filesystem': 'file.mp4', # From your disk
-            'name': 'folder/file.mp4', # This is how it will appear in the zip file
-        },        
+            'filesystem': 'file.mp4', 
+            'name': 'movies/file.mp4', 
+        },       
+        {
+            'filesystem': 'background.jpg', 
+            'name': 'pictures/background.jpg', 
+        },          
     ]
 
     zfly = zipfly.ZipFly(paths=paths)
@@ -37,16 +43,10 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
 
     import os
     import zipfly
-
-    """
-    GET FILE SIZE IN PATHS
-
-    f = open(path['filesystem'],'rb')
-    files_size = os.fstat(f.fileno()).st_size
-
-    """
-
-    zfly = zipfly.ZipFly(paths=paths, store_size=files_size)
+    
+    files_size_in_bytes = 9000000 # file.mp4 + background.jpg
+    
+    zfly = zipfly.ZipFly(paths=paths, store_size=files_size_in_bytes)
 
     # total file-zip's size
     print ( zfly.buffer_prediction_size() )
