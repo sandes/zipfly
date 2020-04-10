@@ -37,7 +37,7 @@ It was created by Buzon.io to generate a zipfly on-the-fly for download in a pyt
 
 ## Examples
 
-### Get zipfile's size
+### file-zip size before creating it
 
 ```python
     import zipfly
