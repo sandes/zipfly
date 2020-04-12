@@ -11,3 +11,4 @@ __author__ = 'Santiago Debus - Buzon.io'
 __license__ = 'MIT'
 
 from .zipfly import ZipFly
+from .api import from_one_file
