@@ -14,5 +14,5 @@ def from_one_file(file_object):
             break
         yield data
 
-
+        # yield
 
