@@ -2,7 +2,10 @@ README.md
 setup.cfg
 setup.py
 zipfly/__init__.py
+zipfly/api.py
 zipfly/compat.py
+zipfly/test.py
+zipfly/zipfly.py
 zipfly.egg-info/PKG-INFO
 zipfly.egg-info/SOURCES.txt
 zipfly.egg-info/dependency_links.txt
