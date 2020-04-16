@@ -37,6 +37,28 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
 
 ## Examples
 
+
+### Efficient way to read a large binary file python
+
+```python
+    import zipfly
+        
+    file_location = '/home/newton/Documents/file-15GB.csv'
+
+    
+    """ read by chunk """
+
+    for chunk in zipfly.from_one_file(file_location):
+        processing(chunk)
+
+    
+
+
+
+
+```
+
+
 ### file-zip size before creating it
 
 ```python
