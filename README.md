@@ -51,10 +51,6 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
     for chunk in zipfly.from_one_file(file_location):
         processing(chunk)
 
-    
-
-
-
 
 ```
 
