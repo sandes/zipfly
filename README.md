@@ -83,7 +83,9 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
     file_location = '/home/newton/Documents/file-15GB.csv'
 
     go_to_streaming = zipfly.from_one_file(file_location)
-    # >>> <generator object from_one_file at 0x7f85aad34a50>
+    
+    print (go_to_streaming)
+    # <generator object from_one_file at 0x7f85aad34a50>
     
 ```
 
