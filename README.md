@@ -38,24 +38,7 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
 ## Examples
 
 
-### Efficient way to read a large binary file python
-
-```python
-    import zipfly
-        
-    file_location = '/home/newton/Documents/file-15GB.csv'
-
-    
-    """ read by chunk """
-
-    for binary_chunk in zipfly.from_one_file(file_location):
-        go_to_streaming(binary_chunk)
-
-
-```
-
-
-### file-zip size before creating it
+### File-zip size before creating it
 
 ```python
     import zipfly
@@ -71,7 +54,7 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
 ```
 
 
-### django
+### Django - Streaming multiple files in a zip
 
 ```python
     
@@ -90,6 +73,22 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
 
     return response 
 ```
+
+### Streaming a large file
+#### Efficient way to read a large binary file python
+
+```python
+    import zipfly
+
+    # Efficient way to read a large binary file python
+
+    file_location = '/home/newton/Documents/file-15GB.csv'
+
+    go_to_streaming = zipfly.from_one_file(file_location)
+    # >>> <generator object from_one_file at 0x7f85aad34a50>
+    
+```
+
 
 
 # Requirements
