@@ -75,7 +75,7 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
 ```
 
 ### Streaming a large file
-#### Efficient way to read a large binary file python
+- Efficient way to read a large binary file python
 
 ```python
     import zipfly
@@ -88,8 +88,6 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
     # >>> <generator object from_one_file at 0x7f85aad34a50>
     
 ```
-
-
 
 # Requirements
 Python > 3.5
