@@ -98,11 +98,11 @@ class ZipFly:
             142, 48 : initial zipfile size             
 
         """
+
         LEN_PATHS = len( self.paths )
         LEN_UTF8 = 2 * LEN_PATHS
         LEN_INITIAL_ZIPFILE_ONE = 142 * LEN_PATHS
         LEN_INITIAL_ZIPFILE_MULTIPLE = 48 * ( LEN_PATHS -1 )
-
 
         def string_size_in_bytes(filename):
             
@@ -131,8 +131,6 @@ class ZipFly:
     def generator(self):
 
         """
-        @ from_file classemthod of ZipFile->ZipInfo
-
         filename should be the path to a file or directory on the filesystem.
         arcname is the name which it will have within the archive (by default,
         this will be the same as filename, but without a drive letter and with
@@ -153,7 +151,6 @@ class ZipFly:
 
                         for chunk in iter(lambda: entry.read(1024 * self.chunksize), b''):
                             dest.write(chunk)
-                            # Yield chunk of the zip file stream in bytes.
                             yield stream.get()
 
 
