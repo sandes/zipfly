@@ -10,6 +10,7 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
 # Basic usage
 
 ```python
+    from zipfile import ZIP_STORED
     import zipfly
     
     # key : fs (filesystem) -> path from your disk
@@ -26,7 +27,11 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
         },          
     ]
 
-    zfly = zipfly.ZipFly(paths=paths)
+    zfly = zipfly.ZipFly(paths = paths,
+                         mode = 'w',
+                         compression = ZIP_STORED,
+                         allowZip64 = True,
+                         compresslevel = None, )
 
     # write a file in disk
     with open("test.zip", "wb") as f:
