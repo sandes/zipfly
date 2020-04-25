@@ -14,7 +14,7 @@ import stat
 import io
 from io import RawIOBase
 from zipfile import ZipFile, ZipInfo
-
+from .api import Utils
 
 class Stream(RawIOBase):
     def __init__(self):
@@ -42,7 +42,14 @@ class Stream(RawIOBase):
 
 class ZipFly:
 
-    def __init__(self, mode='w', paths=None, chunksize=16, store_size=0):
+    def __init__(self,
+                 mode = 'w',
+                 paths = None,
+                 chunksize = 0x4000,
+                 compression = ZIP_STORED,
+                 allowZip64 = True,
+                 compresslevel = None,
+                 store_size = 0):
         
         """
             @param store size : int : size of all files 
@@ -51,11 +58,22 @@ class ZipFly:
         """ 
 
         if mode not in ('w',):
-            raise RunTimeError("requires mode w")
+            raise RunTimeError("ZipFly requires 'w' mode")
+
+        if compression not in ( ZIP_STORED,):
+            raise RunTimeError("Not compression supported")
+
+        if compresslevel not in (None, ):
+            raise RunTimeError("Not compression level supported")            
+
 
         self.comment = b'Written using Buzon-ZipFly'
+        self.mode = mode
         self.paths = paths
         self.chunksize = chunksize
+        self.compression = compression
+        self.allowZip64 = allowZip64
+        self.compresslevel = compresslevel
         self.store_size = int(store_size)
 
     def set_comment(self, comment):
@@ -73,7 +91,7 @@ class ZipFly:
     def reader(self, entry):
 
         def get_chunk():
-            return entry.read(1024 * self.chunksize)
+            return entry.read( self.chunksize )
 
         return get_chunk()
        
@@ -91,74 +109,73 @@ class ZipFly:
         for i in self.generator(): pass
         return self._buffer_size
 
+
     def buffer_prediction_size(self):
 
-        """
-            @CONSTANTS : bytes
-            142, 48 : initial zipfile size             
+        # initial values
+        _len = len( self.paths )
+        _len_utf8 = int(0x2) * _len
 
-        """
+        # zip initial size for one file
+        LIZO = int(0x8e) * _len 
 
-        LEN_PATHS = len( self.paths )
-        LEN_UTF8 = 2 * LEN_PATHS
-        LEN_INITIAL_ZIPFILE_ONE = 142 * LEN_PATHS
-        LEN_INITIAL_ZIPFILE_MULTIPLE = 48 * ( LEN_PATHS -1 )
-
-        def string_size_in_bytes(filename):
-            
-            # encode to utf-8 and get string's size
-            """ python3 zipfile
-            """         
-
-            filename_size = 0
-            for character in filename:
-                filename_size += len(character.encode('utf-8')) * 2 
-            
-            # bytes size
-            return filename_size 
+        # zip initial size for multiple files
+        LIZM = int(0x30) * ( _len -1 ) 
         
         paths_filename_bytes_size=0
         for path in self.paths:
-            paths_filename_bytes_size += string_size_in_bytes(path['name'])
+            paths_filename_bytes_size += Utils.string_size_in_bytes(path['n'])
 
-        prediction_size = self.store_size + \
-                          ( LEN_INITIAL_ZIPFILE_ONE ) - \
-                          ( LEN_INITIAL_ZIPFILE_MULTIPLE ) + \
-                          ( paths_filename_bytes_size - LEN_UTF8 )
 
-        return prediction_size
-  
+        # this is the zip final size
+        return self.store_size + LIZO - LIZM + paths_filename_bytes_size - _len_utf8
+
+
     def generator(self):
 
         """
-        filename should be the path to a file or directory on the filesystem.
-        arcname is the name which it will have within the archive (by default,
-        this will be the same as filename, but without a drive letter and with
-        leading path separators removed).
+        @ from method 'ZipInfo.from_file()'
+            
+            filename should be the path to a file or directory on the filesystem.
+            arcname is the name which it will have within the archive (by default,
+            this will be the same as filename, but without a drive letter and with
+            leading path separators removed).
         """           
 
         stream = Stream()
         
-        with ZipFile(stream, mode='w', ) as zf:
+        with ZipFile(stream,
+                     mode = self.mode,
+                     compression = self.compression,
+                     allowZip64 = self.allowZip64,
+                     compresslevel = self.compresslevel) as zf:
 
             for path in self.paths:             
 
-                z_info = ZipInfo.from_file(path['filesystem'], path['name'])
+                # name in filesystem and name in zip file
+                z_info = ZipInfo.from_file( path['fs'], path['n'] )
 
-                with open(path['filesystem'], 'rb') as entry:
+                with open( path['fs'], 'rb' ) as e:
                     
-                    with zf.open(z_info, mode='w') as dest:
+                    with zf.open( z_info, mode = self.mode ) as d:
 
-                        for chunk in iter(lambda: entry.read(1024 * self.chunksize), b''):
-                            dest.write(chunk)
+                        for chunk in iter( lambda: e.read( self.chunksize ), b'' ):
+                            
+                            # write chunk to zip file
+                            d.write( chunk )
+
+                            # getting bytes from stream to the next iterator
                             yield stream.get()
 
 
             zf.comment = self.comment
 
+        # last piece
         yield stream.get()
+
+        # TESTING (not used)
         self._buffer_size = stream.size()
+
+        # close
         stream.close()
 
-
-    # close stream
