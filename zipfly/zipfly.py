@@ -17,6 +17,14 @@ from zipfile import ZipFile, ZipInfo
 from .api import Utils
 
 class Stream(RawIOBase):
+
+
+    """
+        The RawIOBase ABC extends IOBase. It deals with 
+        the reading and writing of bytes to a stream. FileIO subclasses
+        RawIOBase to provide an interface to files in the machine’s file system.
+    """
+
     def __init__(self):
         self._buffer = b''
         self._size=0
@@ -120,7 +128,7 @@ class ZipFly:
         LIZO = int(0x8e) * _len 
 
         # zip initial size for multiple files
-        LIZM = int(0x30) * ( _len -1 ) 
+        LIZM = int(0x30) * ( _len - 1 ) 
         
         paths_filename_bytes_size=0
         for path in self.paths:
@@ -176,6 +184,6 @@ class ZipFly:
         # TESTING (not used)
         self._buffer_size = stream.size()
 
-        # close
+        # Flush and close this stream.
         stream.close()
 
