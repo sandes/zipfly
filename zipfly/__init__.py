@@ -6,7 +6,7 @@ Derived directly from zipfile.py
 """
 from __future__ import unicode_literals, print_function, with_statement
 
-__version__ = '1.2.0'
+__version__ = '1.2.1'
 __author__ = 'Santiago Debus - Grow HQ, Inc.'
 __license__ = 'MIT'
 
