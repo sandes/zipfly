@@ -58,13 +58,13 @@ class ZipFly:
         """ 
 
         if mode not in ('w',):
-            raise RunTimeError("ZipFly requires 'w' mode")
+            raise RuntimeError("ZipFly requires 'w' mode")
 
         if compression not in ( ZIP_STORED,):
-            raise RunTimeError("Not compression supported")
+            raise RuntimeError("Not compression supported")
 
         if compresslevel not in (None, ):
-            raise RunTimeError("Not compression level supported")            
+            raise RuntimeError("Not compression level supported")            
 
 
         self.comment = b'Written using Buzon-ZipFly'
