@@ -18,12 +18,12 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
 
     paths = [ 
         {
-            'fs': 'file.mp4', 
-            'n': 'movies/file.mp4', 
+            'fs': 'home/user/Videos/jupiter.mp4', 
+            'n': 'movies/jupiter.mp4', 
         },       
         {
-            'fs': 'background.jpg', 
-            'n': 'pictures/background.jpg', 
+            'fs': 'home/user/Documents/mercury.mp4', 
+            'n': 'movies/mercury.jpg', 
         },          
     ]
 
@@ -37,6 +37,14 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
     with open("test.zip", "wb") as f:
         for i in zfly.generator():
             f.write(i)
+
+
+    # test.zip 
+    #
+    #    movies
+    #    |---- jupiter.mp4
+    #    |---- mercury.mp4
+    
 
 ```
 
