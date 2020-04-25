@@ -12,17 +12,17 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
 ```python
     import zipfly
     
-    # key : filesystem -> path from your disk
-    # key : name -> This is how it will appear in the zip file\
+    # key : fs (filesystem) -> path from your disk
+    # key : n (name) -> This is how it will appear in the zip file\
 
     paths = [ 
         {
-            'filesystem': 'file.mp4', 
-            'name': 'movies/file.mp4', 
+            'fs': 'file.mp4', 
+            'n': 'movies/file.mp4', 
         },       
         {
-            'filesystem': 'background.jpg', 
-            'name': 'pictures/background.jpg', 
+            'fs': 'background.jpg', 
+            'n': 'pictures/background.jpg', 
         },          
     ]
 
