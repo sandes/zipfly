@@ -89,7 +89,7 @@ class ZipFly:
     def set_comment(self, comment):
 
         if not isinstance(comment, bytes):
-            str.encode(comment)
+            comment = str.encode(comment)
 
         if len(comment) >= ZIP_MAX_COMMENT:
 
