@@ -83,6 +83,8 @@ class ZipFly:
         self.allowZip64 = allowZip64
         self.compresslevel = compresslevel
         self.store_size = int(store_size)
+        self.ezs = 0x8e # empty zip size in bytes
+
 
     def set_comment(self, comment):
 
@@ -122,13 +124,13 @@ class ZipFly:
 
         # initial values
         _len = len( self.paths )
-        _len_utf8 = int(0x2) * _len
+        _len_utf8 = int( 0x2 ) * _len
 
-        # zip initial size for one file
-        LIZO = int(0x8e) * _len 
+        # Empty zip size in bytes
+        LIZO = int( 0x8e ) * _len
 
         # zip initial size for multiple files
-        LIZM = int(0x30) * ( _len - 1 ) 
+        LIZM = int( 0x30 ) * ( _len - 1 ) 
         
         paths_filename_bytes_size=0
         for path in self.paths:
