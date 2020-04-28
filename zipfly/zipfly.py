@@ -119,7 +119,6 @@ class ZipFly:
         for i in self.generator(): pass
         return self._buffer_size
 
-
     def buffer_prediction_size(self):
 
         # initial values
@@ -132,14 +131,25 @@ class ZipFly:
         # zip initial size for multiple files
         LIZM = int( 0x30 ) * ( _len - 1 ) 
         
-        paths_filename_bytes_size=0
+        pfbs=0
         for path in self.paths:
-            paths_filename_bytes_size += Utils.string_size_in_bytes(path['n'])
+            
+            """
+            we need the sum in of all characteres in a filename in the zip
+            example: 
+                1) 'a' has 1 byte in utf-8 format ( b'a' )
+                2) 'ñ'' has 2 bytes in utf'8 format ( b'\xc3\xb1' )
+                3) '传' has 3 bytes in utf-8 format ( b'\xe4\xbc\xa0' )
+            """
+            pfbs += Utils.string_size_in_bytes(path['n'])
 
-
-        # this is the zip final size
-        return self.store_size + LIZO - LIZM + paths_filename_bytes_size - _len_utf8
-
+        # zip size in bytes
+        return int(self.store_size + \
+                   LIZO - \
+                   LIZM + \
+                   pfbs - \
+                   _len_utf8
+                )
 
     def generator(self):
 
