@@ -9,13 +9,12 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
 
 # Basic usage
 
+    @key required: 'fs' (filesystem) -> path from your disk
+    @key required: 'n' (name) -> This is how it will appear in the zip file
+
 ```python
-    from zipfile import ZIP_STORED
     import zipfly
     
-    # key : fs (filesystem) -> path from your disk
-    # key : n (name) -> This is how it will appear in the zip file\
-
     paths = [ 
         {
             'fs': 'home/user/Videos/jupiter.mp4', 
@@ -27,24 +26,12 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
         },          
     ]
 
-    zfly = zipfly.ZipFly(paths = paths,
-                         mode = 'w',
-                         compression = ZIP_STORED,
-                         allowZip64 = True,
-                         compresslevel = None, )
+    zfly = zipfly.ZipFly(paths = paths )
 
-    # write a file in disk
     with open("test.zip", "wb") as f:
         for i in zfly.generator():
             f.write(i)
 
-
-    # test.zip 
-    #
-    #    movies
-    #    |---- jupiter.mp4
-    #    |---- mercury.mp4
-    
 
 ```
 
@@ -56,13 +43,12 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
 ```python
     import zipfly
     
-    files_size_in_bytes = 9000000 # file.mp4 + background.jpg
+    ss = 92896201 # (file.mp4 + background.jpg) size in bytes
     
-    zfly = zipfly.ZipFly(paths=paths, store_size=files_size_in_bytes)
+    zfly = zipfly.ZipFly(paths=paths, store_size=ss)
 
-    # total file-zip's size
     print ( zfly.buffer_prediction_size() )
-
+    # 92896795
 
 ```
 
@@ -74,11 +60,11 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
     from django.http import StreamingHttpResponse
     import zipfly
 
-
     zfly = zipfly.ZipFly(mode='w', paths=paths)
     
-    # create generator by chunks
     z =  zfly.generator()
+    print (z)
+    # <generator object generator at 0x7f85aad60b13>
 
     response = StreamingHttpResponse(
         z, content_type='application/octet-stream'
