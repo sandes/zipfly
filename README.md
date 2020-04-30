@@ -22,7 +22,7 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
         },       
         {
             'fs': 'home/user/Documents/mercury.mp4', 
-            'n': 'movies/mercury.jpg', 
+            'n': 'movies/mercury.mp4', 
         },          
     ]
 
@@ -79,7 +79,7 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
 ```python
     import zipfly
 
-    file_location = '/home/newton/Documents/file-15GB.csv'
+    file_location = '/home/user/Documents/file-15GB.csv'
 
     go_to_streaming = zipfly.from_one_file(file_location)
     
