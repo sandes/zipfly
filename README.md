@@ -1,16 +1,19 @@
 # Buzon - ZipFly
 
 ZipFly is a zip archive generator based on zipfile.py.
-It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a python application.
+It was created by Buzon.io to generate very large ZIP archives for immediate sending out to clients, or for writing large ZIP archives without memory inflation.
 
+# Requirements
+Python > 3.5
 
 # Install
-    pip install zipfly
+    pip3 install zipfly
 
-# Basic usage
+# Basic usage, compress on-the-fly during writes
+Basic use case is compressing on the fly. Some data will be buffered by the zipfile deflater, but memory inflation is going to be very constrained. Data will be written to destination at fairly regular intervals.
 
-    @key required: 'fs' (filesystem) -> path from your disk
-    @key required: 'n' (name) -> This is how it will appear in the zip file
+`@key required: 'fs' (filesystem) -> path from your disk`
+`@key required: 'n' (name) -> This is how it will appear in the zip file`
 
 ```python
     import zipfly
@@ -38,7 +41,8 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
 ## Examples
 
 
-### File-zip size before creating it
+### Create a ZIP file with size estimation.
+Use the `PredictionSize` to compute the correct size of the resulting archive.
 
 ```python
     import zipfly
@@ -54,6 +58,7 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
 
 
 ### Django - Streaming multiple files in a zip
+The easiest is to use the Django' built-in streaming feature:
 
 ```python
     
@@ -74,12 +79,12 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
 ```
 
 ### Streaming a large file
-- Efficient way to read a large binary file in python
+- Efficient way to read a single very large binary file in python
 
 ```python
     import zipfly
 
-    file_location = '/home/user/Documents/file-15GB.csv'
+    file_location = '/home/user/Documents/file-100-GB.csv'
 
     go_to_streaming = zipfly.from_one_file(file_location)
     
@@ -87,9 +92,6 @@ It was created by Buzon.io to generate a file zip on-the-fly or on-demand in a p
     # <generator object from_one_file at 0x7f85aad34a50>
     
 ```
-
-# Requirements
-Python > 3.5
 
 # License
 This library was created by Buzon.io and is released under the MIT. Copyright 2019 Grow HQ, Inc.
