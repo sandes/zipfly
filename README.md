@@ -12,7 +12,7 @@ Python > 3.5
 # Basic usage, compress on-the-fly during writes
 Basic use case is compressing on the fly. Some data will be buffered by the zipfile deflater, but memory inflation is going to be very constrained. Data will be written to destination at fairly regular intervals.
 
-`@key required: 'fs' (filesystem) -> path from your disk`
+`@key required: 'fs' (filesystem) -> path from your disk`<br />
 `@key required: 'n' (name) -> This is how it will appear in the zip file`
 
 ```python
