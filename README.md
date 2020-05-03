@@ -20,7 +20,7 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 - compression: <b>ZIP_STORED</b> <br/>
 - allowZip64: <b>True</b> <br/>
 - compresslevel: <b>None</b> <br/>
-- store_size: <b>0</b> <br/>
+- storesize: <b>0</b> <br/>
 
 <br/>
 
