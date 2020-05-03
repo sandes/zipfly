@@ -52,7 +52,7 @@ class ZipFly:
 
     def __init__(self,
                  mode = 'w',
-                 paths = None,
+                 paths = [],
                  chunksize = 0x4000,
                  compression = ZIP_STORED,
                  allowZip64 = True,
