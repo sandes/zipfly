@@ -12,7 +12,7 @@ Python > 3.5
 # Basic usage, compress on-the-fly during writes
 Basic use case is compressing on the fly. Some data will be buffered by the zipfile deflater, but memory inflation is going to be very constrained. Data will be written to destination at fairly regular intervals.
 
-`ZipFly` default values:
+`ZipFly` default parameters:
 
 - paths: <b>Empty array</b> <br/>
 - mode: <b>write</b> <br/>
