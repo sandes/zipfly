@@ -20,7 +20,7 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 - <b>compression:</b> Stored <br/>
 - <b>allowZip64:</b> True <br/>
 - <b>compresslevel:</b> None <br/>
-- <b>store_size:</b> (bytes) 0 <br/>
+- <b>storesize:</b> (bytes) 0 <br/>
 
 <br/>
 
@@ -44,7 +44,7 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
         },          
     ]
 
-    zfly = zipfly.ZipFly(paths = paths )
+    zfly = zipfly.ZipFly( paths = paths )
 
     with open("test.zip", "wb") as f:
         for i in zfly.generator():
@@ -64,7 +64,7 @@ Use the `PredictionSize` to compute the correct size of the resulting archive.
     
     ss = 92896201 # (file.mp4 + background.jpg) size in bytes
     
-    zfly = zipfly.ZipFly(paths=paths, store_size=ss)
+    zfly = zipfly.ZipFly( paths=paths, storesize=ss )
 
     print ( zfly.buffer_prediction_size() )
     # 92896795
@@ -80,7 +80,7 @@ The easiest is to use the Django' built-in streaming feature:
     from django.http import StreamingHttpResponse
     import zipfly
 
-    zfly = zipfly.ZipFly(mode='w', paths=paths)
+    zfly = zipfly.ZipFly( mode='w', paths=paths )
     
     z =  zfly.generator()
     print (z)
@@ -101,9 +101,9 @@ Efficient way to read a single very large binary file in python
 
     file_location = '/home/user/Documents/file-100-GB.csv'
 
-    go_to_streaming = zipfly.from_one_file(file_location)
+    go_to_streaming = zipfly.from_one_file( file_location )
     
-    print (go_to_streaming)
+    print ( go_to_streaming )
     # <generator object from_one_file at 0x7f85aad34a50>
     
 ```
