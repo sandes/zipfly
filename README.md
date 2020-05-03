@@ -14,19 +14,21 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 
 `ZipFly` default attributes:
 
-- paths: <b>[ ]</b> <br/>
-- mode: <b>w</b> <br/>
-- chunksize: <b>(bytes) 16384</b> <br/>
-- compression: <b>Stored</b> <br/>
-- allowZip64: <b>True</b> <br/>
-- compresslevel: <b>None</b> <br/>
-- store_size: <b>(bytes) 0</b> <br/>
+- <b>paths:</b> [ ] <br/>
+- <b>mode:</b> w <br/>
+- <b>chunksize:</b> (bytes) 16384 <br/>
+- <b>compression:</b> Stored <br/>
+- <b>allowZip64:</b> True <br/>
+- <b>compresslevel:</b> None <br/>
+- <b>store_size:</b> (bytes) 0 <br/>
 
 <br/>
 
 `paths` required keys:
-- `@key 'fs' (filesystem) -> path from your disk`<br />
-- `@key 'n' (name) -> This is how it will appear in the zip file`
+<pre>
+- @key (filesystem) <b>'fs'</b> -> path from your disk <br />
+- @key (name) <b>'n'</b> -> This is how it will appear in the zip file
+</pre>
 
 ```python
     import zipfly
