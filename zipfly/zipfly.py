@@ -57,7 +57,7 @@ class ZipFly:
                  compression = ZIP_STORED,
                  allowZip64 = True,
                  compresslevel = None,
-                 store_size = 0):
+                 storesize = 0):
         
         """
             @param store size : int : size of all files 
@@ -82,7 +82,7 @@ class ZipFly:
         self.compression = compression
         self.allowZip64 = allowZip64
         self.compresslevel = compresslevel
-        self.store_size = int(store_size)
+        self.storesize = int(storesize)
         self.ezs = 0x8e # empty zip size in bytes
 
 
@@ -144,7 +144,7 @@ class ZipFly:
             pfbs += Utils.string_size_in_bytes(path['n'])
 
         # zip size in bytes
-        return int(self.store_size + \
+        return int(self.storesize + \
                    LIZO - \
                    LIZM + \
                    pfbs - \
