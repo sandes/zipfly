@@ -14,13 +14,13 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 
 `ZipFly` default attributes:
 
-- paths: <b>Empty array</b> <br/>
-- mode: <b>write</b> <br/>
-- chunksize: <b>16384 bytes</b> <br/>
-- compression: <b>STORED</b> <br/>
+- paths: <b>[ ]</b> <br/>
+- mode: <b>w</b> <br/>
+- chunksize: <b>(bytes) 16384</b> <br/>
+- compression: <b>Stored</b> <br/>
 - allowZip64: <b>True</b> <br/>
 - compresslevel: <b>None</b> <br/>
-- store_size: <b>0 bytes</b> <br/>
+- store_size: <b>(bytes) 0</b> <br/>
 
 <br/>
 
