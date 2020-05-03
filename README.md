@@ -12,21 +12,24 @@ Python > 3.5
 # Basic usage, compress on-the-fly during writes
 Basic use case is compressing on the fly. Some data will be buffered by the zipfile deflater, but memory inflation is going to be very constrained. Data will be written to destination at fairly regular intervals.
 
-<b>`ZipFly` default values</b>
+`ZipFly` default attributes:
 
-- paths: <b>[]</b> <br/>
-- mode: <b>w</b> <br/>
-- chunksize: <b>16384 bytes</b> <br/>
-- compression: <b>ZIP_STORED</b> <br/>
-- allowZip64: <b>True</b> <br/>
-- compresslevel: <b>None</b> <br/>
-- storesize: <b>0</b> <br/>
+- <b>paths:</b> [ ] <br/>
+- <b>mode:</b> w <br/>
+- <b>chunksize:</b> (bytes) 16384 <br/>
+- <b>compression:</b> Stored <br/>
+- <b>allowZip64:</b> True <br/>
+- <b>compresslevel:</b> None <br/>
+- <b>storesize:</b> (bytes) 0 <br/>
+
 
 <br/>
 
-<b>`paths` required keys</b>
-`@key 'fs' (filesystem) -> path from your disk`<br />
-`@key 'n' (name) -> This is how it will appear in the zip file`
+`paths` required keys:
+<pre>
+- @key (filesystem) <b>'fs'</b> -> path from your disk <br />
+- @key (name) <b>'n'</b> -> This is how it will appear in the zip file
+</pre>
 
 ```python
     import zipfly
