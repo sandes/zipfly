@@ -12,6 +12,15 @@ Python > 3.5
 # Basic usage, compress on-the-fly during writes
 Basic use case is compressing on the fly. Some data will be buffered by the zipfile deflater, but memory inflation is going to be very constrained. Data will be written to destination at fairly regular intervals.
 
+<b>Default values:</b>
+
+-chunksize: <b><0x4000</b>
+-compression: <b>ZIP_STORED</b>
+-allowZip64: <b>True</b>
+-compresslevel: <b>None</b>
+<br/>
+
+
 `@key required: 'fs' (filesystem) -> path from your disk`<br />
 `@key required: 'n' (name) -> This is how it will appear in the zip file`
 
@@ -79,7 +88,7 @@ The easiest is to use the Django' built-in streaming feature:
 ```
 
 ### Streaming a large file
-- Efficient way to read a single very large binary file in python
+Efficient way to read a single very large binary file in python
 
 ```python
     import zipfly
