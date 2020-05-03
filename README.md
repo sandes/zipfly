@@ -14,10 +14,10 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 
 <b>Default values:</b>
 
--chunksize: <b><0x4000</b>
--compression: <b>ZIP_STORED</b>
--allowZip64: <b>True</b>
--compresslevel: <b>None</b>
+- chunksize: <b><0x4000</b> <br/>
+- compression: <b>ZIP_STORED</b> <br/>
+- allowZip64: <b>True</b> <br/>
+- compresslevel: <b>None</b> <br/>
 <br/>
 
 
