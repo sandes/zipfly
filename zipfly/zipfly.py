@@ -78,7 +78,7 @@ class ZipFly:
         self.comment = b'Written using Buzon-ZipFly'
         self.mode = mode
         self.paths = paths
-        self.chunksize = chunksize
+        self.chunksize = int(chunksize)
         self.compression = compression
         self.allowZip64 = allowZip64
         self.compresslevel = compresslevel
