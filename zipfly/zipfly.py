@@ -163,11 +163,12 @@ class ZipFly:
 
         stream = Stream()
         
+
+
         with ZipFile(stream,
                      mode = self.mode,
                      compression = self.compression,
-                     allowZip64 = self.allowZip64,
-                     compresslevel = self.compresslevel) as zf:
+                     allowZip64 = self.allowZip64,) as zf:
 
             for path in self.paths:             
 
