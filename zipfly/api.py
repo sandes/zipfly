@@ -3,14 +3,14 @@
 import sys
 
 
-def from_one_file(file_location):
+def from_one_file(file_location, chunksize=int(0x4000)):
 
     """read a file piece by piece.
     Default chunk size 1024 * 16 bytes"""
 
     with open(file_location, 'rb') as entry:
 
-        for chunk in iter(lambda: entry.read(1024 * 16), b''):
+        for chunk in iter(lambda: entry.read(chunksize), b''):
 
             yield chunk
 
@@ -21,8 +21,6 @@ class Buffer:
         self.paths = paths
         self.pfbs = 0
         self.storesize = int( ss )
-        self.ss = 0x2
-
 
     def paths_size_in_bytes(self):
 
