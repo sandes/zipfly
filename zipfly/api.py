@@ -21,8 +21,10 @@ class Buffer:
         self.paths = paths
         self.pfbs = 0
         self.storesize = int( ss )
-	self.buffer = 0x2
-	self.buffer_b = 0x8
+        self.ss = 0x2
+	      self.buffer = 0x2
+	      self.buffer_b = 0x8
+
 
     def paths_size_in_bytes(self):
 
