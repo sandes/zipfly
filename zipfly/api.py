@@ -26,7 +26,7 @@ class Buffer:
 
         # encode to utf-8 and get string's size
         """ python3 zipfile
-        ""
+        """
         bt = 0
         for path in self.paths:
 
