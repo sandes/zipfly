@@ -58,7 +58,7 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 
 
 ### Create a ZIP file with size estimation.
-Use the `PredictionSize` to compute the correct size of the resulting archive.
+Use the `BufferPredictionSize` to compute the correct size of the resulting archive.
 
 ```python
     import zipfly

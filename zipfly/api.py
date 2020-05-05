@@ -21,22 +21,25 @@ class Buffer:
         self.paths = paths
         self.pfbs = 0
         self.storesize = int( ss )
-	self.ss = 0x2
+        self.ss = 0x2
+	      self.buffer = 0x2
+	      self.buffer_b = 0x8
+
 
     def paths_size_in_bytes(self):
-        
+
         # encode to utf-8 and get string's size
         """ python3 zipfile
-        """         
+        ""
         bt = 0
         for path in self.paths:
-            
+
             tmp_bt = 0
             for c in path['n']:
                 tmp_bt += len( c.encode('utf-8') ) * int( 0x2 )
-            
+
             # bytes size
-            bt += tmp_bt    
+            bt += tmp_bt
 
         self.pfbs = bt + self.storesize
 
