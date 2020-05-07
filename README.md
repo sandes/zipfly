@@ -96,9 +96,13 @@ The easiest is to use the Django or Flask built-in streaming feature:
     from flask import Response
     import zipfly
     
-    zfly = zipfly.ZipFly( mode='w', paths=paths )
-    
+    """ storesize attribute, read:
+    https://github.com/BuzonIO/zipfly#create-a-zip-file-with-size-estimation
+    """
+
+    zfly = zipfly.ZipFly( mode='w', paths=paths, storesize=ss)
     z =  zfly.generator()
+
     print (z)    
     # <generator object generator at 0x7f85aad60b13>
 
@@ -119,9 +123,13 @@ The easiest is to use the Django or Flask built-in streaming feature:
     from django.http import StreamingHttpResponse
     import zipfly
 
-    zfly = zipfly.ZipFly( mode='w', paths=paths )
-    
+    """ storesize attribute, read:
+    https://github.com/BuzonIO/zipfly#create-a-zip-file-with-size-estimation
+    """    
+
+    zfly = zipfly.ZipFly( mode='w', paths=paths, storesize=ss )
     z =  zfly.generator()
+
     print (z)
     # <generator object generator at 0x7f85aad60b13>
 
