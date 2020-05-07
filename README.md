@@ -25,11 +25,16 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 
 <br/>
 
-`paths` required keys:
-<pre>
-- @key (filesystem) <b>'fs'</b> -> path from your disk <br />
-- @key (name) <b>'n'</b> -> final name in zip file
-</pre>
+`paths` <b>list of dictionaries:</b>
+
+- @key `fs` (filesystem) <br />
+`path from your disk`
+<br />
+
+- @key `n` (name) <br/>
+`final path in zip file`
+
+
 
 ```python
     import zipfly
