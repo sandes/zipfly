@@ -4,7 +4,7 @@ ZipFly is a zip archive generator based on zipfile.py.
 It was created by Buzon.io to generate very large ZIP archives for immediate sending out to clients, or for writing large ZIP archives without memory inflation.
 
 # Requirements
-Python > 3.5
+Python 3.5+
 
 # Install
     pip3 install zipfly
@@ -22,12 +22,13 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 - <b>compresslevel:</b> None <br/>
 - <b>storesize:</b> (bytes) 0 <br/>
 
+
 <br/>
 
 `paths` required keys:
 <pre>
 - @key (filesystem) <b>'fs'</b> -> path from your disk <br />
-- @key (name) <b>'n'</b> -> This is how it will appear in the zip file
+- @key (name) <b>'n'</b> -> final name in zip file
 </pre>
 
 ```python
@@ -57,7 +58,7 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 
 
 ### Create a ZIP file with size estimation.
-Use the `PredictionSize` to compute the correct size of the resulting archive.
+Use the `BufferPredictionSize` to compute the correct size of the resulting archive.
 
 ```python
     import zipfly

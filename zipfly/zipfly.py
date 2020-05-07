@@ -14,7 +14,7 @@ import stat
 import io
 from io import RawIOBase
 from zipfile import ZipFile, ZipInfo
-from .api import Utils
+from .api import Buffer
 
 class Stream(RawIOBase):
 
@@ -57,7 +57,7 @@ class ZipFly:
                  compression = ZIP_STORED,
                  allowZip64 = True,
                  compresslevel = None,
-                 store_size = 0):
+                 storesize = 0):
         
         """
             @param store size : int : size of all files 
@@ -78,11 +78,11 @@ class ZipFly:
         self.comment = b'Written using Buzon-ZipFly'
         self.mode = mode
         self.paths = paths
-        self.chunksize = chunksize
+        self.chunksize = int(chunksize)
         self.compression = compression
         self.allowZip64 = allowZip64
         self.compresslevel = compresslevel
-        self.store_size = int(store_size)
+        self.storesize = storesize
         self.ezs = 0x8e # empty zip size in bytes
 
 
@@ -98,17 +98,13 @@ class ZipFly:
 
         self.comment = comment
 
+
     def reader(self, entry):
 
         def get_chunk():
             return entry.read( self.chunksize )
 
         return get_chunk()
-       
-
-    def get_size(self):
-        
-        return self._buffer_size
 
 
     def buffer_size(self):
@@ -119,37 +115,40 @@ class ZipFly:
         for i in self.generator(): pass
         return self._buffer_size
 
+
     def buffer_prediction_size(self):
+
+        """
+        we need the sum in of all characteres in a filename in the zip
+        example: 
+            1) 'a' has 1 byte in utf-8 format ( b'a' )
+            2) 'ñ' has 2 bytes in utf'8 format ( b'\xc3\xb1' )
+            3) '传' has 3 bytes in utf-8 format ( b'\xe4\xbc\xa0' )
+        """        
 
         # initial values
         _len = len( self.paths )
         _len_utf8 = int( 0x2 ) * _len
 
         # Empty zip size in bytes
-        LIZO = int( 0x8e ) * _len
-
         # zip initial size for multiple files
+        LIZO = int( 0x8e ) * _len
         LIZM = int( 0x30 ) * ( _len - 1 ) 
         
-        pfbs=0
-        for path in self.paths:
-            
-            """
-            we need the sum in of all characteres in a filename in the zip
-            example: 
-                1) 'a' has 1 byte in utf-8 format ( b'a' )
-                2) 'ñ' has 2 bytes in utf'8 format ( b'\xc3\xb1' )
-                3) '传' has 3 bytes in utf-8 format ( b'\xe4\xbc\xa0' )
-            """
-            pfbs += Utils.string_size_in_bytes(path['n'])
+        # get bytes from path
+        b = Buffer(
+            paths = self.paths,
+            ss = self.storesize,
+        )
+        b.paths_size_in_bytes()
 
         # zip size in bytes
-        return int(self.store_size + \
-                   LIZO - \
-                   LIZM + \
-                   pfbs - \
-                   _len_utf8
-                )
+        return int(
+            LIZO \
+            - LIZM \
+            + b.pfbs \
+            -  _len_utf8 
+        )
 
     def generator(self):
 
@@ -164,11 +163,12 @@ class ZipFly:
 
         stream = Stream()
         
+
+
         with ZipFile(stream,
                      mode = self.mode,
                      compression = self.compression,
-                     allowZip64 = self.allowZip64,
-                     compresslevel = self.compresslevel) as zf:
+                     allowZip64 = self.allowZip64,) as zf:
 
             for path in self.paths:             
 
@@ -198,4 +198,17 @@ class ZipFly:
 
         # Flush and close this stream.
         stream.close()
+
+
+    def get_size(self):
+        
+        return self._buffer_size
+
+
+
+
+
+
+
+
 
