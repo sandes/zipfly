@@ -47,8 +47,12 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 
     zfly = zipfly.ZipFly( paths = paths )
 
+    z = zfly.generator()
+    print (z)
+    # <generator object generator at 0x7f85aad60b13>
+
     with open("test.zip", "wb") as f:
-        for i in zfly.generator():
+        for i in z:
             f.write(i)
 
 
@@ -96,20 +100,13 @@ The easiest is to use the Django or Flask built-in streaming feature:
     from flask import Response
     import zipfly
 
-
     zfly = zipfly.ZipFly( mode='w', paths=paths, storesize=ss)
-    z =  zfly.generator()
-
-
-    print (z)    
-    # <generator object generator at 0x7f85aad60b13>
-
 
     response = Response(
-        z, mimetype='application/zip'
+        zfly.generator(),
+        mimetype='application/zip',
     )
-    
-    
+
     response.headers['Content-Length'] = zfly.buffer_prediction_size()
     response.headers['Content-Disposition'] = 'attachment; filename=file.zip'
     
@@ -123,19 +120,12 @@ The easiest is to use the Django or Flask built-in streaming feature:
     from django.http import StreamingHttpResponse
     import zipfly
 
-
     zfly = zipfly.ZipFly( mode='w', paths=paths, storesize=ss )
-    z =  zfly.generator()
-
-
-    print (z)
-    # <generator object generator at 0x7f85aad60b13>
-
 
     response = StreamingHttpResponse(
-        z, content_type='application/octet-stream'
+        zfly.generator(),
+        content_type='application/octet-stream',
     )          
-
 
     response['Content-Length'] = zfly.buffer_prediction_size() 
     response['Content-Disposition'] = 'attachment; filename=file.zip'    
