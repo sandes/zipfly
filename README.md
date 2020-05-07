@@ -95,21 +95,21 @@ The easiest is to use the Django or Flask built-in streaming feature:
 ```python
     from flask import Response
     import zipfly
-    
-    """ storesize attribute, read:
-    https://github.com/BuzonIO/zipfly#create-a-zip-file-with-size-estimation
-    """
+
 
     zfly = zipfly.ZipFly( mode='w', paths=paths, storesize=ss)
     z =  zfly.generator()
 
+
     print (z)    
     # <generator object generator at 0x7f85aad60b13>
 
-    response = Response(z, mimetype='application/zip')
+
+    response = Response(
+        z, mimetype='application/zip'
+    )
     
-    """ ALL HEADERS YOU NEED 
-    """
+    
     response.headers['Content-Length'] = zfly.buffer_prediction_size()
     response.headers['Content-Disposition'] = 'attachment; filename=file.zip'
     
@@ -123,22 +123,20 @@ The easiest is to use the Django or Flask built-in streaming feature:
     from django.http import StreamingHttpResponse
     import zipfly
 
-    """ storesize attribute, read:
-    https://github.com/BuzonIO/zipfly#create-a-zip-file-with-size-estimation
-    """    
 
     zfly = zipfly.ZipFly( mode='w', paths=paths, storesize=ss )
     z =  zfly.generator()
 
+
     print (z)
     # <generator object generator at 0x7f85aad60b13>
+
 
     response = StreamingHttpResponse(
         z, content_type='application/octet-stream'
     )          
 
-    """ ALL HEADERS YOU NEED 
-    """
+
     response['Content-Length'] = zfly.buffer_prediction_size() 
     response['Content-Disposition'] = 'attachment; filename=file.zip'    
 
