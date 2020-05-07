@@ -118,14 +118,6 @@ class ZipFly:
 
     def buffer_prediction_size(self):
 
-        """
-        we need the sum in of all characteres in a filename in the zip
-        example: 
-            1) 'a' has 1 byte in utf-8 format ( b'a' )
-            2) 'ñ' has 2 bytes in utf'8 format ( b'\xc3\xb1' )
-            3) '传' has 3 bytes in utf-8 format ( b'\xe4\xbc\xa0' )
-        """        
-
         # initial values
         _len = len( self.paths )
         _len_utf8 = int( 0x2 ) * _len
@@ -140,7 +132,6 @@ class ZipFly:
             paths = self.paths,
             ss = self.storesize,
         )
-        b.paths_size_in_bytes()
 
         # zip size in bytes
         return int(
