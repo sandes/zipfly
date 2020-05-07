@@ -94,6 +94,16 @@ Efficient way to read a single very large binary file in python
 ## Streaming multiple files in a zip
 The easiest is to use the Django or Flask built-in streaming feature:
 
+
+- @attribute `paths` <br />
+`https://github.com/BuzonIO/zipfly#basic-usage-compress-on-the-fly-during-writes`
+<br />
+
+- @attribute `storesize` <br/>
+`https://github.com/BuzonIO/zipfly#create-a-zip-file-with-size-estimation`
+
+
+
 ### Flask
 
 ```python
