@@ -72,9 +72,47 @@ Use the `BufferPredictionSize` to compute the correct size of the resulting arch
 
 ```
 
+### Streaming a large file
+Efficient way to read a single very large binary file in python
 
-### Django - Streaming multiple files in a zip
-The easiest is to use the Django' built-in streaming feature:
+```python
+    import zipfly
+
+    file_location = '/home/user/Documents/file-100-GB.csv'
+
+    go_to_streaming = zipfly.from_one_file( file_location )
+    
+    print ( go_to_streaming )
+    # <generator object from_one_file at 0x7f85aad34a50>
+    
+```
+
+## Streaming multiple files in a zip
+The easiest is to use the Django or Flask built-in streaming feature:
+
+### Flask
+
+```python
+    from flask import Response
+    import zipfly
+    
+    zfly = zipfly.ZipFly( mode='w', paths=paths )
+    
+    z =  zfly.generator()
+    print (z)    
+    # <generator object generator at 0x7f85aad60b13>
+
+    response = Response(z, mimetype='application/zip')
+    
+    """ ALL HEADERS YOU NEED 
+    """
+    response.headers['Content-Length'] = zfly.buffer_prediction_size()
+    response.headers['Content-Disposition'] = 'attachment; filename=file.zip'
+    
+    return response
+```
+
+### Django 
 
 ```python
     
@@ -91,23 +129,14 @@ The easiest is to use the Django' built-in streaming feature:
         z, content_type='application/octet-stream'
     )          
 
+    """ ALL HEADERS YOU NEED 
+    """
+    response['Content-Length'] = zfly.buffer_prediction_size() 
+    response['Content-Disposition'] = 'attachment; filename=file.zip'    
+
     return response 
 ```
 
-### Streaming a large file
-Efficient way to read a single very large binary file in python
-
-```python
-    import zipfly
-
-    file_location = '/home/user/Documents/file-100-GB.csv'
-
-    go_to_streaming = zipfly.from_one_file( file_location )
-    
-    print ( go_to_streaming )
-    # <generator object from_one_file at 0x7f85aad34a50>
-    
-```
 
 # License
 This library was created by Buzon.io and is released under the MIT. Copyright 2019 Grow HQ, Inc.
