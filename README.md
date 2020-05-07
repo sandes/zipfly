@@ -52,12 +52,12 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 
     zfly = zipfly.ZipFly( paths = paths )
 
-    z = zfly.generator()
-    print (z)
+    generator = zfly.generator()
+    print ( generator )
     # <generator object generator at 0x7f85aad60b13>
 
     with open("test.zip", "wb") as f:
-        for i in z:
+        for i in generator:
             f.write(i)
 
 
