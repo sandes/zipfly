@@ -29,7 +29,7 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 
 - @key `fs` (filesystem) <br />
 `path from your disk`
-<br />
+
 
 - @key `n` (name) <br/>
 `final path in zip file`
