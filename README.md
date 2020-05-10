@@ -27,13 +27,8 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 
 `paths` <b>list of dictionaries:</b>
 
-- @key: `fs` (filesystem) <br />
-@value: `path from your disk`
-
-
-- @key `n` (name) <br/>
-@value: `final path in zip file`
-
+- `fs` (filesystem): `path from your disk`<br>
+- `n` (name): `final path in zip file`
 
 
 ```python
