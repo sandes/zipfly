@@ -112,8 +112,11 @@ The easiest is to use the Django or Flask built-in streaming feature:
 
     zfly = zipfly.ZipFly( mode='w', paths=paths, storesize=ss)
 
+    z = zfly.generator()
+    # z (<generator object generator at 0x7f85aad34a50>)
+
     response = Response(
-        zfly.generator(),
+        z,
         mimetype='application/zip',
     )
 
@@ -132,8 +135,11 @@ The easiest is to use the Django or Flask built-in streaming feature:
 
     zfly = zipfly.ZipFly( mode='w', paths=paths, storesize=ss )
 
+    z = zfly.generator()
+    # z (<generator object generator at 0x7f85aad34a50>)
+
     response = StreamingHttpResponse(
-        zfly.generator(),
+        z,
         content_type='application/octet-stream',
     )          
 
