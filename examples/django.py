@@ -1,28 +1,36 @@
 from django.http import StreamingHttpResponse
 import zipfly
 
+paths = [ 
+    {
+        'fs': 'home/user/Videos/jupiter.mp4', 
+        'n': 'movies/jupiter.mp4', 
+    },       
+    {
+        'fs': 'home/user/Documents/mercury.mp4', 
+        'n': 'movies/mercury.mp4', 
+    },          
+]
 
-"""
+storesize = 92896201 # (jupiter.mp4 + mercury.mp4) size in bytes
 
-@attribute "paths"
-    https://github.com/BuzonIO/zipfly#basic-usage-compress-on-the-fly-during-writes
+# constructor
+zfly = zipfly.ZipFly( mode='w', paths=paths, storesize=storesize )
 
-@attribute "storesize"
-https://github.com/BuzonIO/zipfly#create-a-zip-file-with-size-estimation
-
-"""
-
-zfly = zipfly.ZipFly( mode='w', paths=paths, storesize=ss )
-
+# z is a new generator 
+# (<generator object generator at 0x7f85aad34a50>)
 z = zfly.generator()
-# z (<generator object generator at 0x7f85aad34a50>)
 
+# django streaming
 response = StreamingHttpResponse(
     z,
     content_type='application/octet-stream',
 )          
 
-response['Content-Length'] = zfly.buffer_prediction_size() 
+# zip size before creating it
+content_length = zfly.buffer_prediction_size()
+
+response['Content-Length'] =  content_length
 response['Content-Disposition'] = 'attachment; filename=file.zip'    
 
 return response 
