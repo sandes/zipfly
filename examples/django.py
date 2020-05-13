@@ -4,13 +4,11 @@ import zipfly
 
 """
 
-- @attribute `paths` <br />
-`https://github.com/BuzonIO/zipfly#basic-usage-compress-on-the-fly-during-writes`
-<br />
+@attribute "paths"
+    https://github.com/BuzonIO/zipfly#basic-usage-compress-on-the-fly-during-writes
 
-- @attribute `storesize` <br/>
-`https://github.com/BuzonIO/zipfly#create-a-zip-file-with-size-estimation`
-
+@attribute "storesize"
+https://github.com/BuzonIO/zipfly#create-a-zip-file-with-size-estimation
 
 """
 
