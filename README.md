@@ -150,5 +150,10 @@ The easiest is to use the Django or Flask built-in streaming feature:
 ```
 
 
+# Maintainer
+Santiago Debus ['http://santiagodebus.com'](@santiagodebus.com)<br>
+
+<i>Santiago's open-source projects are supported by his Patreon. If you found this project helpful, any monetary contributions to the Patreon are appreciated and will be put to good creative use.</i>
+
 # License
 This library was created by Buzon.io and is released under the MIT. Copyright 2019 Grow HQ, Inc.
