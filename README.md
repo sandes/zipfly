@@ -151,7 +151,7 @@ The easiest is to use the Django or Flask built-in streaming feature:
 
 
 # Maintainer
-Santiago Debus ['http://santiagodebus.com'](@santiagodebus.com)<br>
+Santiago Debus <a href="http://santiagodebus.com/" target="_blank">(@santiagodebus.com)</a><br>
 
 <i>Santiago's open-source projects are supported by his Patreon. If you found this project helpful, any monetary contributions to the Patreon are appreciated and will be put to good creative use.</i>
 
