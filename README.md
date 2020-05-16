@@ -57,7 +57,7 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 
 
 ```
-## Examples
+# Examples
 
 > <b>Create a ZIP file with size estimation</b>
 Use the `BufferPredictionSize` to compute the correct size of the resulting archive.
@@ -67,6 +67,12 @@ Efficient way to read a single very large binary file in python
 
 > <b>Streaming multiple files in a zip</b>
 The easiest is to use the Django or Flask built-in streaming feature
+
+
+# Stats
+[![Downloads](https://pepy.tech/badge/zipfly)](https://pepy.tech/project/zipfly)
+[![Downloads](https://pepy.tech/badge/zipfly/month)](https://pepy.tech/project/zipfly/month)
+[![Downloads](https://pepy.tech/badge/zipfly/week)](https://pepy.tech/project/zipfly/week)
 
 
 # Maintainer
