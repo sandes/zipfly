@@ -1,3 +1,7 @@
+[![Downloads](https://pepy.tech/badge/zipfly)](https://pepy.tech/project/zipfly)
+[![Downloads](https://pepy.tech/badge/zipfly/month)](https://pepy.tech/project/zipfly/month)
+[![Downloads](https://pepy.tech/badge/zipfly/week)](https://pepy.tech/project/zipfly/week)
+
 # Buzon - ZipFly
 
 ZipFly is a zip archive generator based on zipfile.py.
@@ -67,12 +71,6 @@ Efficient way to read a single very large binary file in python
 
 > <b>Streaming multiple files in a zip</b>
 The easiest is to use the Django or Flask built-in streaming feature
-
-
-# Stats
-[![Downloads](https://pepy.tech/badge/zipfly)](https://pepy.tech/project/zipfly)
-[![Downloads](https://pepy.tech/badge/zipfly/month)](https://pepy.tech/project/zipfly/month)
-[![Downloads](https://pepy.tech/badge/zipfly/week)](https://pepy.tech/project/zipfly/week)
 
 
 # Maintainer
