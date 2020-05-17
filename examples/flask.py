@@ -12,7 +12,22 @@ paths = [
     },          
 ]
 
+
 storesize = 92896201 # (jupiter.mp4 + mercury.mp4) size in bytes
+
+"""
+# You can get the file size in python with:
+
+storesize = 0
+for path in paths:
+
+    # (jupiter.mp4 + mercury.mp4) size in bytes
+
+    f = open(path['fs'], 'rb')
+    storesize += os.fstat(f.fileno()).st_size
+
+"""
+
 
 # constructor
 zfly = zipfly.ZipFly( mode='w', paths=paths, storesize=storesize )

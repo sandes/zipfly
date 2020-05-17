@@ -27,6 +27,8 @@ setup(
     url='http://github.com/buzonIO/zipfly',
     download_url = 'https://github.com/BuzonIO/zipfly/archive/v2.1.1.tar.gz',
     author='Buzon',
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',    
     author_email='support@buzon.io',
     keywords=['zipfly','buzon'],
     install_requires=[],    
