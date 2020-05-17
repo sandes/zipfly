@@ -1,14 +1,30 @@
 import zipfly
-
-"""
-@attribute "storesize"
-    https://github.com/BuzonIO/zipfly#create-a-zip-file-with-size-estimation
-"""
+import os
 
 
-ss = 92896201 # (file.mp4 + background.jpg) size in bytes
+paths = [ 
+    {
+        'fs': 'home/user/Videos/jupiter.mp4', 
+        'n': 'movies/jupiter.mp4', 
+    },       
+    {
+        'fs': 'home/user/Documents/mercury.mp4', 
+        'n': 'movies/mercury.mp4', 
+    },          
+]
 
-zfly = zipfly.ZipFly( paths=paths, storesize=ss )
+storesize = 0
+for path in paths:
 
+    # (jupiter.mp4 + mercury.mp4) size in bytes
+
+    f = open(path['fs'], 'rb')
+    storesize += os.fstat(f.fileno()).st_size
+
+
+zfly = zipfly.ZipFly( paths=paths, storesize=storesize )
+
+
+# zip size before creating it in bytes
 print ( zfly.buffer_prediction_size() )
-# 92896795
+
