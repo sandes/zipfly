@@ -1,6 +1,4 @@
 [![Downloads](https://pepy.tech/badge/zipfly)](https://pepy.tech/project/zipfly)
-[![Downloads](https://pepy.tech/badge/zipfly/month)](https://pepy.tech/project/zipfly/month)
-[![Downloads](https://pepy.tech/badge/zipfly/week)](https://pepy.tech/project/zipfly/week)
 
 # Buzon - ZipFly
 
@@ -64,7 +62,7 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 # Examples
 
 > <b>Create a ZIP file with size estimation</b>
-Use the `BufferPredictionSize` to compute the correct size of the resulting archive.
+Use the `BufferPredictionSize` to compute the correct size of the resulting archive before creating it.
 
 > <b>Streaming a large file</b>
 Efficient way to read a single very large binary file in python
