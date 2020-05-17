@@ -120,7 +120,7 @@ class ZipFly:
 
         # initial values
         _len = len( self.paths )
-        _len_utf8 = int( 0x2 ) * _len
+        _len_utf8 = int( 0x2 ) * _len  # magic number
 
         # Empty zip size in bytes
         # zip initial size for multiple files
