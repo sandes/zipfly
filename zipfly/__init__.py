@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Iterable ZIP archive generator.
 
-Derived directly from zipfile.py
-"""
 from __future__ import unicode_literals, print_function, with_statement
 
 __version__ = '2.1.1'
