@@ -1,4 +1,4 @@
-<a><img src="https://img.shields.io/circleci/project/github/badges/shields/master" alt="build status"></a>
+[![Build Status](https://travis-ci.com/BuzonIO/zipfly.svg?branch=master)](https://travis-ci.com/BuzonIO/zipfly)
 <a><img src="https://img.shields.io/badge/version-3.0.1-blue" alt="build status"></a>
 [![Downloads](https://pepy.tech/badge/zipfly)](https://pepy.tech/project/zipfly)
 
