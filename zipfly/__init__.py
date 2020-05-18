@@ -2,7 +2,7 @@
 
 from __future__ import unicode_literals, print_function, with_statement
 
-__version__ = '2.1.1'
+__version__ = '2.1.2'
 __author__ = 'Santiago Debus - Grow HQ, Inc.'
 __license__ = 'MIT'
 
