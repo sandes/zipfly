@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.com/BuzonIO/zipfly.svg?branch=master)](https://travis-ci.com/BuzonIO/zipfly)
-<a><img src="https://img.shields.io/badge/version-3.0.1-blue" alt="build status"></a>
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/buzonio/zipfly)
 [![Downloads](https://pepy.tech/badge/zipfly)](https://pepy.tech/project/zipfly)
 
 # Buzon - ZipFly
