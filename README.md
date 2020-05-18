@@ -1,3 +1,5 @@
+<a><img src="https://img.shields.io/circleci/project/github/badges/shields/master" alt="build status"></a>
+<a><img src="https://img.shields.io/badge/version-3.0.1-blue" alt="build status"></a>
 [![Downloads](https://pepy.tech/badge/zipfly)](https://pepy.tech/project/zipfly)
 
 # Buzon - ZipFly
