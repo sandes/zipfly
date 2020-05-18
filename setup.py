@@ -6,8 +6,8 @@ import os
 CURRENT_PYTHON = sys.version_info[:2]
 REQUIRED_PYTHON = (3,5)
 
-# This check and everything above must remain compatible with Python 2.7.
-if CURRENT_PYTHON <= REQUIRED_PYTHON:
+# This check and everything above must remain compatible with Python 3.5
+if CURRENT_PYTHON < REQUIRED_PYTHON:
     
     sys.stderr.write("""
         ==========================
@@ -23,15 +23,15 @@ setup(
     name='zipfly',
     packages=['zipfly'],
     description='ZipFly',
-    version='2.1.1',
+    version='2.1.2',
     url='http://github.com/buzonIO/zipfly',
-    download_url = 'https://github.com/BuzonIO/zipfly/archive/v2.1.1.tar.gz',
+    download_url = 'https://github.com/BuzonIO/zipfly/archive/v2.1.2.tar.gz',
     author='Buzon',
     long_description=open('README.md').read(),
-    long_description_content_type='text/markdown',    
+    long_description_content_type='text/markdown',
     author_email='support@buzon.io',
     keywords=['zipfly','buzon'],
-    install_requires=[],    
+    install_requires=[],
     classifiers=[
         'Development Status :: 5 - Production/Stable',  
         'Intended Audience :: Developers',
@@ -41,6 +41,5 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
-        
-    ],    
-) 
+    ],
+)
