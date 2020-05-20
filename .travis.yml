@@ -7,5 +7,5 @@ python:
 install:
   - "pip install ."
 script:
-  - python zipfly/test.py
+  - python3 zipfly/test.py
 sudo: false
