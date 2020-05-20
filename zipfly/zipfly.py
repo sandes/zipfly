@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from zipfile import (
     ZIP_STORED,
     ZIP64_LIMIT,
@@ -8,11 +9,12 @@ from zipfile import (
     zlib,
     crc32
 )
+
 import stat
 import io
 from io import RawIOBase
 from zipfile import ZipFile, ZipInfo
-from api import Buffer
+from .api import Buffer
 
 class Stream(RawIOBase):
 
@@ -73,7 +75,7 @@ class ZipFly:
             raise RuntimeError("Not compression level supported")            
 
 
-        self.comment = b'Written using Zipfly v3.0.1'
+        self.comment = b'Written using Zipfly v3.0.4'
         self.mode = mode
         self.paths = paths
         self.chunksize = int(chunksize)

@@ -4,10 +4,7 @@ python:
   - "3.6"
   - "3.7"
   - "3.8"
-before_install:  
-  - "export PYTHONPATH=$PYTHONPATH:$(pwd)"  
 install:
-  - "pip3 install zipfly"
-script:
-  - python zipfly/test.py
+  - "pip install zipfly"
+script: nosetests
 sudo: false
