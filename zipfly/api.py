@@ -38,7 +38,7 @@ class Buffer:
                 getting bytes from character in UTF-8 format
                 example: 
                     1) 'a' has 1 byte in utf-8 format ( b'a' )
-                    2) 'ñ' has 2 bytes in utf'8 format ( b'\xc3\xb1' )
+                    2) 'ñ' has 2 bytes in utf-8 format ( b'\xc3\xb1' )
                     3) '传' has 3 bytes in utf-8 format ( b'\xe4\xbc\xa0' )
                 """
 
