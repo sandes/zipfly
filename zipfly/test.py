@@ -1,2 +1,2 @@
-#v3.0.1
+#v3.0.4
 #integration
