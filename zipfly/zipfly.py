@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from zipfile import (
     ZIP_STORED,
     ZIP64_LIMIT,
@@ -9,12 +8,11 @@ from zipfile import (
     zlib,
     crc32
 )
-
 import stat
 import io
 from io import RawIOBase
 from zipfile import ZipFile, ZipInfo
-from .api import Buffer
+from api import Buffer
 
 class Stream(RawIOBase):
 
