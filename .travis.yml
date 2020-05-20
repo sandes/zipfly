@@ -1,4 +1,4 @@
-#travis ci
+#travis cio
 language: python
 python:
   - "3.5"
@@ -6,7 +6,6 @@ python:
   - "3.7"
   - "3.8"
 install:
-  - "pip3 install zipfly"
-script:
-  - bash python3 -c "import zipfly; print(zipfly.__version__)"
+  - "pip3 install ."
+script: nosetests
 sudo: false
