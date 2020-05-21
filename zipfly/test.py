@@ -68,7 +68,7 @@ class TestBufferPredictionSize(unittest.TestCase):
 
     def test_paths1(self):
 
-        for test_n in range(1, 100):
+        for test_n in range(1, 40):
 
             with self.subTest(i=test_n):
             
