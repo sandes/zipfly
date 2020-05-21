@@ -68,6 +68,10 @@ class TestBufferPredictionSize(unittest.TestCase):
 
     def test_paths1(self):
 
+        print ("# # # # # # # # # # # # # # # # # # # # # # # # #")
+        print ("TEST IF REAL ZIP SIZE IS EQUAL TO PREDICTION SIZE")
+        print ("# # # # # # # # # # # # # # # # # # # # # # # # #")
+
         for test_n in range(1, 40):
 
             with self.subTest(i=test_n):
@@ -93,7 +97,7 @@ class TestBufferPredictionSize(unittest.TestCase):
                 zs = os.fstat(f.fileno()).st_size
                 f.close()
 
-                print ("FINAL SIZE vs PREDICTION:", str(zs)[3:], "--", str(ps)[3:], (" ---- OK" if zs==ps else "FAIL"))
+                print (str(zs)[3:], "--", str(ps)[3:], (" ---- OK" if zs==ps else "FAIL"))
 
                 self.assertEqual(zs,ps)    
               
