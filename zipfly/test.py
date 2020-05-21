@@ -21,28 +21,30 @@ class TestBufferPredictionSize(unittest.TestCase):
 
     def test_size(self):
 
-        storesize = 0
-        for path in paths:
-            f = open(path['fs'], 'rb')
-            storesize += os.fstat(f.fileno()).st_size
-            f.close()
+        for i in range(0, 100):
+            with self.subTest(i=i):
+                storesize = 0
+                for path in paths:
+                    f = open(path['fs'], 'rb')
+                    storesize += os.fstat(f.fileno()).st_size
+                    f.close()
 
-        zfly = zipfly.ZipFly( paths = paths, storesize = storesize )
+                zfly = zipfly.ZipFly( paths = paths, storesize = storesize )
 
-        # zip size before creating it in bytes
-        ps = zfly.buffer_prediction_size()
+                # zip size before creating it in bytes
+                ps = zfly.buffer_prediction_size()
 
-        with open("test.zip", "wb") as f:
-            for i in zfly.generator():
-                f.write(i)
+                with open("test.zip", "wb") as f:
+                    for i in zfly.generator():
+                        f.write(i)
 
-        f = open('test.zip', 'rb')
-        zs = os.fstat(f.fileno()).st_size
-        f.close()
+                f = open('test.zip', 'rb')
+                zs = os.fstat(f.fileno()).st_size
+                f.close()
 
-        self.assertEqual(zs,ps)    
+                self.assertEqual(zs,ps)    
 
 
 if __name__ == '__main__':
-    for _ in range(10):
-        unittest.main()
+    
+    unittest.main()
