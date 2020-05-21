@@ -11,7 +11,7 @@ def rs(N):
                     string.digits) for _ in range(N))
 
 def pick_n():
-    return int(''.join(random.SystemRandom().choice(string.digits) for _ in range(2)))
+    return int(''.join(random.SystemRandom().choice(string.digits) for _ in range(3)))
 
 p1 = os.getcwd()
 p2 = p1
