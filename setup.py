@@ -6,7 +6,7 @@ import os
 CURRENT_PYTHON = sys.version_info[:2]
 REQUIRED_PYTHON = (3,6)
 
-# This check and everything above must remain compatible with Python 3.5
+# This check and everything above must remain compatible with Python 3.6
 if CURRENT_PYTHON < REQUIRED_PYTHON:
     
     sys.stderr.write("""
