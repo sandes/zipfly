@@ -1,12 +1,12 @@
 Metadata-Version: 2.1
 Name: zipfly
-Version: 4.0.2
+Version: 4.0.3
 Summary: ZipFly
 Home-page: http://github.com/buzonIO/zipfly
 Author: Buzon
 Author-email: support@buzon.io
 License: UNKNOWN
-Download-URL: https://github.com/BuzonIO/zipfly/archive/v4.0.2.tar.gz
+Download-URL: https://github.com/BuzonIO/zipfly/archive/v4.0.3.tar.gz
 Description: [![Build Status](https://travis-ci.com/BuzonIO/zipfly.svg?branch=master)](https://travis-ci.com/BuzonIO/zipfly)
         ![GitHub release (latest by date)](https://img.shields.io/github/v/release/buzonio/zipfly)
         [![Downloads](https://pepy.tech/badge/zipfly)](https://pepy.tech/project/zipfly)
@@ -95,7 +95,6 @@ Classifier: Development Status :: 5 - Production/Stable
 Classifier: Intended Audience :: Developers
 Classifier: Topic :: Software Development :: Build Tools
 Classifier: License :: OSI Approved :: MIT License
-Classifier: Programming Language :: Python :: 3.5
 Classifier: Programming Language :: Python :: 3.6
 Classifier: Programming Language :: Python :: 3.7
 Classifier: Programming Language :: Python :: 3.8
