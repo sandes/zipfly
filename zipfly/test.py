@@ -40,11 +40,11 @@ class TestBufferPredictionSize(unittest.TestCase):
                 # zip size before creating it in bytes
                 ps = zfly.buffer_prediction_size()
 
-                with open(f"test{test_n}.zip", "wb") as f:
+                with open("test{}.zip".format(test_n), "wb") as f:
                     for i in zfly.generator():
                         f.write(i)
 
-                f = open(f'test{test_n}.zip', 'rb')
+                f = open("test{}.zip".format(test_n), 'rb')
                 zs = os.fstat(f.fileno()).st_size
                 f.close()
 
