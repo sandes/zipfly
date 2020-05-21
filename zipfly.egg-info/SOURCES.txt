@@ -4,6 +4,7 @@ setup.py
 zipfly/__init__.py
 zipfly/api.py
 zipfly/compat.py
+zipfly/response.py
 zipfly/test.py
 zipfly/zipfly.py
 zipfly.egg-info/PKG-INFO
