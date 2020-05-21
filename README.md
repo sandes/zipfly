@@ -8,7 +8,7 @@ ZipFly is a zip archive generator based on zipfile.py.
 It was created by Buzon.io to generate very large ZIP archives for immediate sending out to clients, or for writing large ZIP archives without memory inflation.
 
 # Requirements
-Python 3.5+
+Python 3.6+
 
 # Install
     pip3 install zipfly
@@ -16,9 +16,9 @@ Python 3.5+
 # Basic usage, compress on-the-fly during writes
 Basic use case is compressing on the fly. Some data will be buffered by the zipfile deflater, but memory inflation is going to be very constrained. Data will be written to destination at fairly regular intervals.
 
-`ZipFly` class may have arguments (defaults) for greater flexibility:<br>    
+`ZipFly` defaults arguments:<br>    
 - <b>paths:</b> [ ] <br/>
-- <b>mode:</b> w <br/>
+- <b>mode:</b> (write) w <br/>
 - <b>chunksize:</b> (bytes) 16384 <br/>
 - <b>compression:</b> Stored <br/>
 - <b>allowZip64:</b> True <br/>
