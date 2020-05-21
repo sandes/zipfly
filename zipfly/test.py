@@ -22,27 +22,49 @@ class TestBufferPredictionSize(unittest.TestCase):
 
     def test_size(self):
 
-        for _ in range(10):
-            storesize = 0
-            for path in paths:
-                f = open(path['fs'], 'rb')
-                storesize += os.fstat(f.fileno()).st_size
-                f.close()
-
-            zfly = zipfly.ZipFly( paths = paths, storesize = storesize )
-
-            # zip size before creating it in bytes
-            ps = zfly.buffer_prediction_size()
-
-            with open("test.zip", "wb") as f:
-                for i in zfly.generator():
-                    f.write(i)
-
-            f = open('test.zip', 'rb')
-            zs = os.fstat(f.fileno()).st_size
+        storesize = 0
+        for path in paths:
+            f = open(path['fs'], 'rb')
+            storesize += os.fstat(f.fileno()).st_size
             f.close()
 
-            self.assertEqual(zs,ps)    
+        zfly = zipfly.ZipFly( paths = paths, storesize = storesize )
+
+        # zip size before creating it in bytes
+        ps = zfly.buffer_prediction_size()
+
+        with open("test.zip", "wb") as f:
+            for i in zfly.generator():
+                f.write(i)
+
+        f = open('test.zip', 'rb')
+        zs = os.fstat(f.fileno()).st_size
+        f.close()
+
+        self.assertEqual(zs,ps)    
+
+    def test_buffer(self):
+
+        storesize = 0
+        for path in paths:
+            f = open(path['fs'], 'rb')
+            storesize += os.fstat(f.fileno()).st_size
+            f.close()
+
+        zfly = zipfly.ZipFly( paths = paths, storesize = storesize )
+
+        # zip size before creating it in bytes
+        ps = zfly.buffer_prediction_size()
+
+        with open("test2.zip", "wb") as f:
+            for i in zfly.generator():
+                f.write(i)
+
+        f = open('test2.zip', 'rb')
+        zs = os.fstat(f.fileno()).st_size
+        f.close()
+
+        self.assertEqual(zs,ps)    
 
 
 
