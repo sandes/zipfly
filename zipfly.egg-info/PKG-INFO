@@ -1,12 +1,12 @@
 Metadata-Version: 2.1
 Name: zipfly
-Version: 3.0.5
+Version: 3.0.6
 Summary: ZipFly
 Home-page: http://github.com/buzonIO/zipfly
 Author: Buzon
 Author-email: support@buzon.io
 License: UNKNOWN
-Download-URL: https://github.com/BuzonIO/zipfly/archive/v3.0.5.tar.gz
+Download-URL: https://github.com/BuzonIO/zipfly/archive/v3.0.6.tar.gz
 Description: [![Build Status](https://travis-ci.com/BuzonIO/zipfly.svg?branch=master)](https://travis-ci.com/BuzonIO/zipfly)
         ![GitHub release (latest by date)](https://img.shields.io/github/v/release/buzonio/zipfly)
         [![Downloads](https://pepy.tech/badge/zipfly)](https://pepy.tech/project/zipfly)
