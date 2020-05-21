@@ -64,12 +64,6 @@ for dirpath, dnames, fnames in os.walk(p3):
         )    
 
 
-
-print (paths1)
-print (paths2)
-print (paths3)
-
-
 class TestBufferPredictionSize(unittest.TestCase):
 
     def test_paths1(self):
