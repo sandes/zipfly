@@ -9,8 +9,8 @@ p1 = os.getcwd()
 p2 = os.getcwd()
 p3 = os.getcwd()
 
-print (p1)
 
+"""
 idx1 = p1.rfind("/zipfly")
 p1 = p1[0:idx1]
 p1 = p1+"/dist/"
@@ -22,6 +22,15 @@ p2 = p2+"/zipfly.egg-info/"
 idx3 = p3.rfind("/zipfly")
 p3 = p3[0:idx3]
 p3 = p3+"/examples/"
+
+"""
+p1 = p1+"/dist/"
+p2 = p2+"/zipfly.egg-info/"
+p3 = p3+"/examples/"
+
+print ("p1: ", p1)
+print ("p2: ", p2)
+print ("p3: ", p3)
 
 paths1 = []
 paths2 = []
