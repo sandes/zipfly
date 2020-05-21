@@ -93,7 +93,7 @@ class TestBufferPredictionSize(unittest.TestCase):
                 zs = os.fstat(f.fileno()).st_size
                 f.close()
 
-                print ("FINAL SIZE vs PREDICTION:", zs, "--", ps, (" ---- OK" if zs==ps else "FAIL"))
+                print ("FINAL SIZE vs PREDICTION:", str(zs)[3:], "--", str(ps)[3:], (" ---- OK" if zs==ps else "FAIL"))
 
                 self.assertEqual(zs,ps)    
               
