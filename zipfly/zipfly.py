@@ -75,7 +75,7 @@ class ZipFly:
             raise RuntimeError("Not compression level supported")            
 
 
-        self.comment = b'Written using Zipfly v3.0.5'
+        self.comment = b'Written using Buzon-ZipFly'
         self.mode = mode
         self.paths = paths
         self.chunksize = int(chunksize)
@@ -96,7 +96,7 @@ class ZipFly:
             # trunk comment
             comment = comment[:ZIP_MAX_COMMENT]
 
-        self.comment = comment
+        #self.comment = comment
 
 
     def reader(self, entry):
