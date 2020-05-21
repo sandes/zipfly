@@ -3,7 +3,6 @@ import zipfly
 import os
 
 
-print ("Zipfly version:", zipfly.__version__)
 
 paths = []
 
