@@ -9,6 +9,7 @@ p1 = os.getcwd()
 p2 = os.getcwd()
 p3 = os.getcwd()
 
+print (p1)
 
 idx1 = p1.rfind("/zipfly")
 p1 = p1[0:idx1]
