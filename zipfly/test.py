@@ -68,7 +68,7 @@ class TestBufferPredictionSize(unittest.TestCase):
 
     def test_paths1(self):
 
-        for test_n in range(1, 5):
+        for test_n in range(1, 10):
 
             with self.subTest(i=test_n):
             
@@ -97,7 +97,7 @@ class TestBufferPredictionSize(unittest.TestCase):
 
     def test_paths2(self):
 
-        for test_n in range(1, 5):
+        for test_n in range(1, 10):
 
             with self.subTest(i=test_n):
             
@@ -126,7 +126,7 @@ class TestBufferPredictionSize(unittest.TestCase):
 
     def test_paths3(self):
 
-        for test_n in range(1, 5):
+        for test_n in range(1, 10):
 
             with self.subTest(i=test_n):
             
