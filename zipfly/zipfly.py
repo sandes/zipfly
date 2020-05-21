@@ -72,7 +72,7 @@ class ZipFly:
             raise RuntimeError("Not compression level supported")
 
 
-        self.comment = b'Written using Zipfly v4.0.1'
+        self.comment = b'Written using Zipfly v4.0.2'
         self.mode = mode
         self.paths = paths
         self.chunksize = int(chunksize)
@@ -153,13 +153,17 @@ class ZipFly:
 
         for c in tmp_comment:
             tmp_s += len( c.encode('utf-8') )
-
         COMM = tmp_s - COMM
 
         # files names
         bt = 0
         for path in self.paths:
             tmp_bt = 0
+
+            if (path['n'])[0] in ('/'):
+                # is dir then trunk
+                path['n'] = (path['n'])[1:len( path['n'] ) ]
+
             for c in path['n']:
                 tmp_bt += len( c.encode('utf-8') ) * int( 0x2 )
             bt += tmp_bt
