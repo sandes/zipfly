@@ -72,7 +72,7 @@ class ZipFly:
             raise RuntimeError("Not compression level supported")
 
 
-        self.comment = b'Written using Zipfly v4.0.2'
+        self.comment = b'Written using Zipfly v4.0.3'
         self.mode = mode
         self.paths = paths
         self.chunksize = int(chunksize)
