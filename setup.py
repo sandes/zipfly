@@ -4,7 +4,7 @@ import os
 
 
 CURRENT_PYTHON = sys.version_info[:2]
-REQUIRED_PYTHON = (3,5)
+REQUIRED_PYTHON = (3,6)
 
 # This check and everything above must remain compatible with Python 3.5
 if CURRENT_PYTHON < REQUIRED_PYTHON:
@@ -23,9 +23,9 @@ setup(
     name='zipfly',
     packages=['zipfly'],
     description='ZipFly',
-    version='4.0.2',
+    version='4.0.3',
     url='http://github.com/buzonIO/zipfly',
-    download_url = 'https://github.com/BuzonIO/zipfly/archive/v4.0.2.tar.gz',
+    download_url = 'https://github.com/BuzonIO/zipfly/archive/v4.0.3.tar.gz',
     author='Buzon',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
@@ -37,7 +37,6 @@ setup(
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Build Tools',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
