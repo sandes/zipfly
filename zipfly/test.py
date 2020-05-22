@@ -75,7 +75,7 @@ class TestBufferPredictionSize(unittest.TestCase):
             """
         )
 
-        for test_n in range(1, 501):
+        for test_n in range(1, 1001):
 
             with self.subTest(i=test_n):
             
@@ -102,6 +102,7 @@ class TestBufferPredictionSize(unittest.TestCase):
 
                 print (
                     "test-{}.zip ->".format(test_n),
+                    str(zs)[3:],
                     (" ---- OK" if zs==ps else " ---- FAIL")
                 )
 
