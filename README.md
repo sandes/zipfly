@@ -44,11 +44,15 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
         },
     ]
 
-    # ZipFly
     zfly = zipfly.ZipFly( paths = paths )
 
+    generator = zfly.generator()
+    print (generator)
+    # <generator object ZipFly.generator at 0x7f74d52bcc50>
+
+
     with open("large.zip", "wb") as f:
-        for i in zfly.generator():
+        for i in generator:
             f.write(i)
 
 ```
