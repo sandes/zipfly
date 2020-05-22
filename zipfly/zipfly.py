@@ -13,6 +13,7 @@ import io
 import stat
 from io import RawIOBase
 from zipfile import ZipFile, ZipInfo
+from zipfly import __version__
 
 class Stream(RawIOBase):
 
@@ -72,7 +73,7 @@ class ZipFly:
             raise RuntimeError("Not compression level supported")
 
 
-        self.comment = b'Written using Zipfly v4.0.3'
+        self.comment = f'Written using Zipfly v{__version__}'
         self.mode = mode
         self.paths = paths
         self.chunksize = int(chunksize)
@@ -138,7 +139,7 @@ class ZipFly:
 
         # initial values
         _len = len( self.paths )
-        _len_utf8 = int( 0x2 ) * _len  # magic number
+        _len_utf8 = int( 0x2 ) * _len
 
         LIZO = int( 0x8e ) * _len
         LIZM = int( 0x30 ) * ( _len - 1 )
@@ -150,7 +151,6 @@ class ZipFly:
 
         COMM = int( 0x1a )
         tmp_s = 0
-
         for c in tmp_comment:
             tmp_s += len( c.encode('utf-8') )
         COMM = tmp_s - COMM
@@ -183,15 +183,7 @@ class ZipFly:
 
     def generator(self):
 
-        """
-        @ from method 'ZipInfo.from_file()'
-
-            filename should be the path to a file or directory on the filesystem.
-            arcname is the name which it will have within the archive (by default,
-            this will be the same as filename, but without a drive letter and with
-            leading path separators removed).
-        """
-
+        # stream 
         stream = Stream()
 
         with ZipFile(stream,
@@ -201,8 +193,25 @@ class ZipFly:
 
             for path in self.paths:
 
-                # name in filesystem and name in zip file
-                z_info = ZipInfo.from_file( path['fs'], path['n'] )
+                try:
+
+                    """
+                    filename should be the path to a file or directory on the filesystem.
+                    arcname is the name which it will have within the archive (by default,
+                    this will be the same as filename, but without a drive letter and with
+                    leading path separators removed).
+                    """             
+
+                    z_info = ZipInfo.from_file(
+                        path['fs'],
+                        path['n']
+                    )
+
+                except KeyError:
+
+                    z_info = ZipInfo.from_file(
+                        path['fs']
+                    )
 
                 with open( path['fs'], 'rb' ) as e:
 
@@ -217,6 +226,7 @@ class ZipFly:
                             yield stream.get()
 
 
+            self.set_comment(self.comment)
             zf.comment = self.comment
 
         # last piece
