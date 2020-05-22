@@ -102,7 +102,8 @@ class TestBufferPredictionSize(unittest.TestCase):
 
                 print (
                     "test-{}.zip ->".format(test_n),
-                    "{} KB".format(round(zs/1024,2)), " ({} bytes)".format(zs)
+                    "{} KB".format(round(zs/1024,2)),
+                    "({} bytes)".format(zs),
                     (" ---- OK" if zs==ps else " ---- FAIL")
                 )
 
