@@ -13,15 +13,17 @@ import io
 import stat
 from io import RawIOBase
 from zipfile import ZipFile, ZipInfo
-from zipfly import __version__
+
+#from zipfly import __version__
+__version__ = '5.0.2'
 
 class Stream(RawIOBase):
 
 
     """
-        The RawIOBase ABC extends IOBase. It deals with 
-        the reading and writing of bytes to a stream. FileIO subclasses
-        RawIOBase to provide an interface to files in the machine’s file system.
+    The RawIOBase ABC extends IOBase. It deals with 
+    the reading and writing of bytes to a stream. FileIO subclasses
+    RawIOBase to provide an interface to files in the machine’s file system.
     """
 
     def __init__(self):
