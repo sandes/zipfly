@@ -102,7 +102,6 @@ class TestBufferPredictionSize(unittest.TestCase):
 
                 print (
                     "test-{}.zip ->".format(test_n),
-                    str(zs)[3:],"--",str(ps)[3:],
                     (" ---- OK" if zs==ps else " ---- FAIL")
                 )
 
