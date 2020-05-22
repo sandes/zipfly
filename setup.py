@@ -1,7 +1,7 @@
 from setuptools import setup
 import sys
 import os
-
+from zipfly.zipfly import __version__
 
 CURRENT_PYTHON = sys.version_info[:2]
 REQUIRED_PYTHON = (3,6)
@@ -23,9 +23,9 @@ setup(
     name='zipfly',
     packages=['zipfly'],
     description='ZipFly',
-    version='4.0.3',
+    version=__version__,
     url='http://github.com/buzonIO/zipfly',
-    download_url = 'https://github.com/BuzonIO/zipfly/archive/v4.0.3.tar.gz',
+    download_url = f'https://github.com/BuzonIO/zipfly/archive/v{__version__}.tar.gz',
     author='Buzon',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
