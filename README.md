@@ -31,45 +31,43 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 `paths` <b>list of dictionaries:</b>
 
 - `fs` (filesystem): `path from your disk`<br>
-- `n` (name): `final path in zip file`
+- `n` (name): `add a custom file path in the zip file` <i>(Optional)</i>
 
 
 ```python
+    
     import zipfly
     
-    paths = [ 
+    paths = [
         {
-            'fs': 'home/user/Videos/jupiter.mp4', 
-            'n': 'movies/jupiter.mp4', 
-        },       
-        {
-            'fs': 'home/user/Documents/mercury.mp4', 
-            'n': 'movies/mercury.mp4', 
-        },          
+            'fs': '/path/to/large/file'
+        },
     ]
 
+    # ZipFly
     zfly = zipfly.ZipFly( paths = paths )
 
-    generator = zfly.generator()
-    print ( generator )
-    # <generator object generator at 0x7f85aad60b13>
-
-    with open("test.zip", "wb") as f:
-        for i in generator:
+    with open("large.zip", "wb") as f:
+        for i in zfly.generator():
             f.write(i)
-
 
 ```
 # Examples
 
-> <b>Create a ZIP file with size estimation</b>
+> <b>Streaming multiple files in a zip with Django or Flask</b>
+Send forth large files to clients with the most popular frameworks
+
+> <b>Create paths</b>
+Easy way to create the array `paths` from a parent folder.
+
+> <b>Predict the size of the zip file before creating it</b>
 Use the `BufferPredictionSize` to compute the correct size of the resulting archive before creating it.
 
 > <b>Streaming a large file</b>
 Efficient way to read a single very large binary file in python
 
-> <b>Streaming multiple files in a zip</b>
-The easiest is to use the Django or Flask built-in streaming feature
+> <b>Set a comment</b>
+Your own comment in the zip file
 
 
 # Maintainer
