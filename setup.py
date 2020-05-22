@@ -1,7 +1,9 @@
 from setuptools import setup
 import sys
 import os
-from zipfly.zipfly import __version__
+
+#from zipfly.zipfly import __version__
+__version__ = '5.0.2'
 
 CURRENT_PYTHON = sys.version_info[:2]
 REQUIRED_PYTHON = (3,6)
