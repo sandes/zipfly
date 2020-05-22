@@ -75,7 +75,7 @@ class TestBufferPredictionSize(unittest.TestCase):
             """
         )
 
-        for test_n in range(1, 500):
+        for test_n in range(1, 501):
 
             with self.subTest(i=test_n):
             
