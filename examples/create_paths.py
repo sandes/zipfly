@@ -1,4 +1,4 @@
-# easy way to create the array paths 
+# create paths
 
 import zipfly
 import os
