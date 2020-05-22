@@ -69,9 +69,9 @@ class TestBufferPredictionSize(unittest.TestCase):
     def test_buffer_prediction_size(self):
 
         print (
-            """# # # # # # # # # # # # # # # # # # # # # # # # #
-            TEST IF REAL ZIP SIZE IS EQUAL TO PREDICTION SIZE
-            # # # # # # # # # # # # # # # # # # # # # # # # #"""
+        """# # # # # # # # # # # # # # # # # # # # # # # # #
+        TEST IF REAL ZIP SIZE IS EQUAL TO PREDICTION SIZE
+        # # # # # # # # # # # # # # # # # # # # # # # # #"""
         )
 
         for test_n in range(1, 40):
@@ -100,7 +100,7 @@ class TestBufferPredictionSize(unittest.TestCase):
                 f.close()
 
                 print (
-                    "test{}.zip ->".format(test_n),
+                    "test-{}.zip ->".format(test_n),
                     str(zs)[3:],"--",str(ps)[3:],
                     (" ---- OK" if zs==ps else " ---- FAIL")
                 )
