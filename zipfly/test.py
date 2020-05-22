@@ -3,6 +3,8 @@ import zipfly
 import os
 import string
 import random
+import zipfile
+import datetime
 
 def rs(N):
     return ''.join(random.SystemRandom().choice(
@@ -107,7 +109,26 @@ class TestBufferPredictionSize(unittest.TestCase):
                     (" ---- OK" if zs==ps else " ---- FAIL")
                 )
 
+                print ("\n")
+
+                archive = zipfile.ZipFile("test{}.zip".format(test_n))
+                for info in archive.infolist():
+                    
+                    print (
+                        "Filename:", info.filename,"\n"
+                        "Comment:", info.comment,"\n"
+                        "Datetime:", datetime.datetime(*info.date_time),"\n"
+                        "System:", info.create_system, '(0 = Windows, 3 = Unix)',"\n"
+                        "Version:", info.create_version,"\n"
+                        "Compress size:", info.compress_size, 'bytes',"\n"
+                        "File size:", info.file_size, 'bytes'"\n"
+                    )
+
+                print ("\n\n")
+
                 self.assertEqual(zs,ps)    
+
+
               
                      
 if __name__ == '__main__':
