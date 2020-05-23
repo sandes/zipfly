@@ -100,7 +100,11 @@ class TestBufferPredictionSize(unittest.TestCase):
                 zs = os.fstat(f.fileno()).st_size
                 f.close()
 
+<<<<<<< HEAD
                 #fetch
+=======
+                ###
+>>>>>>> 4649cdfb7c85ba500d76f81d87a764d4ff951132
 
                 print (
                     "test-{}.zip ->".format(test_n),
