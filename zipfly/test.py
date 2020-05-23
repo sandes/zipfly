@@ -62,7 +62,7 @@ for dirpath, dnames, fnames in os.walk(p3):
                 'fs':'{}{}'.format(p3,f),
                 'n':'{}{}'.format(p3,f),
             }
-        )    
+        )
 
 class TestBufferPredictionSize(unittest.TestCase):
 
@@ -78,7 +78,7 @@ class TestBufferPredictionSize(unittest.TestCase):
         for test_n in range(1, 50):
 
             with self.subTest(i=test_n):
-            
+
                 storesize = 0
                 for path in paths1:
                     f = open(path['fs'], 'rb')
@@ -100,6 +100,8 @@ class TestBufferPredictionSize(unittest.TestCase):
                 zs = os.fstat(f.fileno()).st_size
                 f.close()
 
+                #fetch
+
                 print (
                     "test-{}.zip ->".format(test_n),
                     "{} KB".format(round(zs/1024,2)),
@@ -107,10 +109,9 @@ class TestBufferPredictionSize(unittest.TestCase):
                     (" ---- OK" if zs==ps else " ---- FAIL")
                 )
 
-                self.assertEqual(zs,ps)    
-              
-                     
-if __name__ == '__main__':
-    
-    unittest.main()
+                self.assertEqual(zs,ps)
 
+
+if __name__ == '__main__':
+
+    unittest.main()
