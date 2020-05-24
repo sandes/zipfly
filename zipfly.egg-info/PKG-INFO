@@ -1,12 +1,12 @@
 Metadata-Version: 2.1
 Name: zipfly
-Version: 5.0.2
+Version: 5.0.3
 Summary: ZipFly
 Home-page: http://github.com/buzonIO/zipfly
 Author: Buzon
 Author-email: support@buzon.io
 License: UNKNOWN
-Download-URL: https://github.com/BuzonIO/zipfly/archive/v5.0.2.tar.gz
+Download-URL: https://github.com/BuzonIO/zipfly/archive/v5.0.3.tar.gz
 Description: [![Build Status](https://travis-ci.com/BuzonIO/zipfly.svg?branch=master)](https://travis-ci.com/BuzonIO/zipfly)
         ![GitHub release (latest by date)](https://img.shields.io/github/v/release/buzonio/zipfly)
         [![Downloads](https://pepy.tech/badge/zipfly)](https://pepy.tech/project/zipfly)
@@ -39,25 +39,32 @@ Description: [![Build Status](https://travis-ci.com/BuzonIO/zipfly.svg?branch=ma
         
         `paths` <b>list of dictionaries:</b>
         
-        - `fs` (filesystem): `path from your disk`<br>
-        - `n` (name): `add a custom file path in the zip file` <i>(Optional)</i>
+        |                   |.                          
+        |----------------   |-------------------------------      
+        |**fs**             |Should be the path to a file or directory on the filesystem            
+        |**n** *(Optional)* |Is the name which it will have within the archive <br> (by default, this will be the same as **fs**)
         
+        <br>
         
         ```python
-            
+        
             import zipfly
-            
+        
             paths = [
                 {
                     'fs': '/path/to/large/file'
                 },
             ]
         
-            # ZipFly
             zfly = zipfly.ZipFly( paths = paths )
         
+            generator = zfly.generator()
+            print (generator)
+            # <generator object ZipFly.generator at 0x7f74d52bcc50>
+        
+        
             with open("large.zip", "wb") as f:
-                for i in zfly.generator():
+                for i in generator:
                     f.write(i)
         
         ```
