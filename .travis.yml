@@ -2,10 +2,6 @@
 language: python
 os:
   - linux
-matrix:
-  include:
-    - dist: xenial
-    - dist: trusty
 python:
   - "3.6"
   - "3.7"
