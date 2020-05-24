@@ -2,6 +2,9 @@
 language: python
 os:
   - linux
+dist:
+  - trusty
+  - xenial
 python:
   - "3.6"
   - "3.7"
