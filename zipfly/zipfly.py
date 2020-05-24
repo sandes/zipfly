@@ -15,7 +15,7 @@ from io import RawIOBase
 from zipfile import ZipFile, ZipInfo
 
 #from zipfly import __version__
-__version__ = '5.0.2'
+__version__ = '5.0.3'
 
 class Stream(RawIOBase):
 
