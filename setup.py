@@ -3,7 +3,7 @@ import sys
 import os
 
 #from zipfly.zipfly import __version__
-__version__ = '5.0.3'
+__version__ = '5.0.4'
 
 CURRENT_PYTHON = sys.version_info[:2]
 REQUIRED_PYTHON = (3,6)
