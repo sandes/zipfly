@@ -35,6 +35,8 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 |**fs**             |Should be the path to a file or directory on the filesystem            
 |**n** *(Optional)* |Is the name which it will have within the archive <br> (by default, this will be the same as **fs**)
 
+<br>
+
 ```python
 
     import zipfly
