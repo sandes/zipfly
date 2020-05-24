@@ -15,7 +15,7 @@ from io import RawIOBase
 from zipfile import ZipFile, ZipInfo
 
 #from zipfly import __version__
-__version__ = '5.0.3'
+__version__ = '5.0.4'
 
 class Stream(RawIOBase):
 
@@ -78,13 +78,15 @@ class ZipFly:
         self.comment = f'Written using Zipfly v{__version__}'
         self.mode = mode
         self.paths = paths
+        self.filesystem = 'fs'
+        self.arcname = 'n'
         self.chunksize = int(chunksize)
         self.compression = compression
         self.allowZip64 = allowZip64
         self.compresslevel = compresslevel
         self.storesize = storesize
+        self.encode = 'utf-8'
         self.ezs = 0x8e # empty zip size in bytes
-
 
     def set_comment(self, comment):
 
@@ -154,7 +156,7 @@ class ZipFly:
         COMM = int( 0x1a )
         tmp_s = 0
         for c in tmp_comment:
-            tmp_s += len( c.encode('utf-8') )
+            tmp_s += len( c.encode(self.encode) )
         COMM = tmp_s - COMM
 
         # files names
@@ -162,13 +164,19 @@ class ZipFly:
         for path in self.paths:
             tmp_bt = 0
 
-            if 'n' in path:
-                if (path['n'])[0] in ('/', ):
-                    # is dir then trunk
-                    path['n'] = (path['n'])[ 1 : len( path['n'] ) ]
+            name = self.arcname
+            if not self.arcname in path:
+                name = self.filesystem
 
-            for c in path['n']:
-                tmp_bt += len( c.encode('utf-8') ) * int( 0x2 )
+            tmp_name = path[name]
+
+            if (tmp_name)[0] in ('/', ):
+                # is dir then trunk
+                tmp_name = (tmp_name)[ 1 : len( tmp_name ) ]
+
+            for c in tmp_name:
+                tmp_bt += len( c.encode(self.encode) ) * int( 0x2 )
+
             bt += tmp_bt
 
         # current process size
@@ -193,26 +201,26 @@ class ZipFly:
 
             for path in self.paths:
 
-                if not 'fs' in path:
+                if not self.filesystem in path:
                     raise RuntimeError(" 'fs' key is required ")
 
                 """
-                path['fs'] should be the path to a file or directory on the filesystem.
-                path['n'] is the name which it will have within the archive (by default,
+                filesystem should be the path to a file or directory on the filesystem.
+                arcname is the name which it will have within the archive (by default,
                 this will be the same as filename
                 """
 
-                if 'n' in path:
+                if self.arcname in path:
                     z_info = ZipInfo.from_file(
-                        path['fs'],
-                        path['n']
+                        path[self.filesystem],
+                        path[self.arcname]
                     )
                 else:
                     z_info = ZipInfo.from_file(
-                        path['fs']
+                        path[self.filesystem]
                     )
 
-                with open( path['fs'], 'rb' ) as e:
+                with open( path[self.filesystem], 'rb' ) as e:
 
                     with zf.open( z_info, mode = self.mode ) as d:
 
