@@ -2,15 +2,18 @@ import zipfly
 import os
 
 
-paths = [ 
+# IMPORTANT:
+# BufferPredictionSize only works with Linux (Xenial)
+
+paths = [
     {
-        'fs': 'home/user/Videos/jupiter.mp4', 
-        'n': 'movies/jupiter.mp4', 
-    },       
+        'fs': 'home/user/Videos/jupiter.mp4',
+        'n': 'movies/jupiter.mp4',
+    },
     {
-        'fs': 'home/user/Documents/mercury.mp4', 
-        'n': 'movies/mercury.mp4', 
-    },          
+        'fs': 'home/user/Documents/mercury.mp4',
+        'n': 'movies/mercury.mp4',
+    },
 ]
 
 storesize = 0
