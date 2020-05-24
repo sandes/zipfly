@@ -3,14 +3,14 @@ import sys
 import os
 
 #from zipfly.zipfly import __version__
-__version__ = '5.0.2'
+__version__ = '5.0.3'
 
 CURRENT_PYTHON = sys.version_info[:2]
 REQUIRED_PYTHON = (3,6)
 
 # This check and everything above must remain compatible with Python 3.6
 if CURRENT_PYTHON < REQUIRED_PYTHON:
-    
+
     sys.stderr.write("""
         ==========================
         Unsupported Python version
@@ -35,7 +35,7 @@ setup(
     keywords=['zipfly','buzon'],
     install_requires=[],
     classifiers=[
-        'Development Status :: 5 - Production/Stable',  
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Build Tools',
         'License :: OSI Approved :: MIT License',
