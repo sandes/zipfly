@@ -193,6 +193,9 @@ class ZipFly:
 
             for path in self.paths:
 
+                if not 'fs' in path:
+                    raise RuntimeError(" 'fs' key is required ")
+
                 """
                 path['fs'] should be the path to a file or directory on the filesystem.
                 path['n'] is the name which it will have within the archive (by default,
