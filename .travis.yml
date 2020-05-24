@@ -1,11 +1,15 @@
 #travis cio
 language: python
+os:
+  - linux
+  - osx
+  - windows
 python:
   - "3.6"
   - "3.7"
   - "3.8"
 install:
   - "pip3 install ."
-script: 
+script:
   - "python zipfly/test.py"
 sudo: false
