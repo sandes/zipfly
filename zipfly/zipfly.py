@@ -21,7 +21,7 @@ class Stream(RawIOBase):
 
 
     """
-    The RawIOBase ABC extends IOBase. It deals with 
+    The RawIOBase ABC extends IOBase. It deals with
     the reading and writing of bytes to a stream. FileIO subclasses
     RawIOBase to provide an interface to files in the machine’s file system.
     """
@@ -133,7 +133,7 @@ class ZipFly:
         :arg    bytes       comment:        Buffer comment zip file
 
         getting bytes from character in UTF-8 format
-        example: 
+        example:
             1) 'a' has 1 byte in utf-8 format ( b'a' )
             2) 'ñ' has 2 bytes in utf-8 format ( b'\xc3\xb1' )
             3) '传' has 3 bytes in utf-8 format ( b'\xe4\xbc\xa0' )
@@ -162,30 +162,28 @@ class ZipFly:
         for path in self.paths:
             tmp_bt = 0
 
-            if (path['n'])[0] in ('/'):
-                # is dir then trunk
-                path['n'] = (path['n'])[1:len( path['n'] ) ]
+            if 'n' in path:
+                if (path['n'])[0] in ('/', ):
+                    # is dir then trunk
+                    path['n'] = (path['n'])[ 1 : len( path['n'] ) ]
 
             for c in path['n']:
                 tmp_bt += len( c.encode('utf-8') ) * int( 0x2 )
             bt += tmp_bt
 
+        # current process size
         pfbs = (
-            bt \
-            + COMM \
-            + self.storesize
+            bt + COMM + self.storesize
         )
 
+        # simple arithmetic
         return int(
-            LIZO \
-            - LIZM \
-            + pfbs \
-            -  _len_utf8
+            LIZO - LIZM + pfbs -  _len_utf8
         )
 
     def generator(self):
 
-        # stream 
+        # stream
         stream = Stream()
 
         with ZipFile(stream,
@@ -195,22 +193,18 @@ class ZipFly:
 
             for path in self.paths:
 
-                try:
+                """
+                path['fs'] should be the path to a file or directory on the filesystem.
+                path['n'] is the name which it will have within the archive (by default,
+                this will be the same as filename
+                """
 
-                    """
-                    filename should be the path to a file or directory on the filesystem.
-                    arcname is the name which it will have within the archive (by default,
-                    this will be the same as filename, but without a drive letter and with
-                    leading path separators removed).
-                    """             
-
+                if 'n' in path:
                     z_info = ZipInfo.from_file(
                         path['fs'],
                         path['n']
                     )
-
-                except KeyError:
-
+                else:
                     z_info = ZipInfo.from_file(
                         path['fs']
                     )
