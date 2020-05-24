@@ -30,10 +30,10 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 
 `paths` <b>list of dictionaries:</b>
 
-- `fs` (filesystem): `should be the path to a file or directory on the filesystem.`<br>
-- `n` (name): `is the name which it will have within the archive (by default,
-        this will be the same as fs` <i>(Optional)</i>
-
+|                   |.                          
+|----------------   |-------------------------------      
+|**fs**             |Should be the path to a file or directory on the filesystem            
+|**n** *(Optional)* |Is the name which it will have within the archive <br> (by default, this will be the same as **fs**)
 
 ```python
 
