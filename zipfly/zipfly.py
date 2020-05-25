@@ -169,7 +169,6 @@ class ZipFly:
                 name = self.filesystem
 
             tmp_name = path[name]
-
             if (tmp_name)[0] in ('/', ):
                 # is dir then trunk
                 tmp_name = (tmp_name)[ 1 : len( tmp_name ) ]
