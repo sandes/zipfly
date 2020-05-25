@@ -1,53 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from zipfile import (
-    ZIP_STORED,
-    ZIP64_LIMIT,
-    ZIP_FILECOUNT_LIMIT,
-    ZIP_MAX_COMMENT,
-    ZIP_DEFLATED,
-    zlib,
-    crc32
-)
 import io
 import stat
-from io import RawIOBase
-from zipfile import ZipFile, ZipInfo
-
-#from zipfly import __version__
-__version__ = '5.0.4'
-
-class Stream(RawIOBase):
-
-
-    """
-    The RawIOBase ABC extends IOBase. It deals with
-    the reading and writing of bytes to a stream. FileIO subclasses
-    RawIOBase to provide an interface to files in the machine’s file system.
-    """
-
-    def __init__(self):
-        self._buffer = b''
-        self._size=0
-
-    def writable(self):
-        return True
-
-    def write(self, b):
-        if self.closed:
-            raise ValueError('Stream was closed!')
-        self._buffer += b
-        return len(b)
-
-    def get(self):
-        chunk = self._buffer
-        self._buffer = b''
-        self._size += len(chunk)
-        return chunk
-
-    def size(self):
-        return self._size
-
+import zipfile
+from version import __version__
+from stream import ZipflyStream
 
 class ZipFly:
 
@@ -55,20 +12,20 @@ class ZipFly:
                  mode = 'w',
                  paths = [],
                  chunksize = 0x4000,
-                 compression = ZIP_STORED,
+                 compression = zipfile.ZIP_STORED,
                  allowZip64 = True,
                  compresslevel = None,
                  storesize = 0):
 
         """
-            @param store size : int : size of all files
-            in paths without compression
+        @param store size : int : size of all files
+        in paths without compression
         """
 
         if mode not in ('w',):
             raise RuntimeError("ZipFly requires 'w' mode")
 
-        if compression not in ( ZIP_STORED,):
+        if compression not in ( zipfile.ZIP_STORED,):
             raise RuntimeError("Not compression supported")
 
         if compresslevel not in (None, ):
@@ -93,10 +50,10 @@ class ZipFly:
         if not isinstance(comment, bytes):
             comment = str.encode(comment)
 
-        if len(comment) >= ZIP_MAX_COMMENT:
+        if len(comment) >= zipfile.ZIP_MAX_COMMENT:
 
             # trunk comment
-            comment = comment[:ZIP_MAX_COMMENT]
+            comment = comment[:zipfile.ZIP_MAX_COMMENT]
 
         self.comment = comment
 
@@ -112,9 +69,9 @@ class ZipFly:
     def buffer_size(self):
 
         '''
-            FOR UNIT TESTING (not used)
-            using to get the buffer size
-            this size is different from the size of each file added
+        FOR UNIT TESTING (not used)
+        using to get the buffer size
+        this size is different from the size of each file added
         '''
 
         for i in self.generator(): pass
@@ -191,12 +148,13 @@ class ZipFly:
     def generator(self):
 
         # stream
-        stream = Stream()
+        stream = ZipflyStream()
 
-        with ZipFile(stream,
-                     mode = self.mode,
-                     compression = self.compression,
-                     allowZip64 = self.allowZip64,) as zf:
+        with zipfile.ZipFile(
+            stream,
+            mode = self.mode,
+            compression = self.compression,
+            allowZip64 = self.allowZip64,) as zf:
 
             for path in self.paths:
 
@@ -209,36 +167,38 @@ class ZipFly:
                 this will be the same as filename
                 """
 
-                if self.arcname in path:
-                    z_info = ZipInfo.from_file(
-                        path[self.filesystem],
-                        path[self.arcname]
-                    )
-                else:
-                    z_info = ZipInfo.from_file(
-                        path[self.filesystem]
-                    )
+                if not self.arcname in path:
+
+                    # arcname will be default path
+                    path[self.arcname] = path[self.filesystem]
+
+                z_info = zipfile.ZipInfo.from_file(
+                    path[self.filesystem],
+                    path[self.arcname]
+                )
 
                 with open( path[self.filesystem], 'rb' ) as e:
+                    # Read from filesystem:
 
                     with zf.open( z_info, mode = self.mode ) as d:
 
                         for chunk in iter( lambda: e.read( self.chunksize ), b'' ):
 
-                            # write chunk to zip file
-                            d.write( chunk )
+                            # (e.read( ... )) this get a small chunk of the file
+                            # and return a callback to the next iterator
 
-                            # getting bytes from stream to the next iterator
+                            d.write( chunk )
                             yield stream.get()
 
 
             self.set_comment(self.comment)
             zf.comment = self.comment
 
-        # last piece
+        # last chunk
         yield stream.get()
 
-        # TESTING (not used)
+        # (TESTING)
+        # get the real size of the zipfile
         self._buffer_size = stream.size()
 
         # Flush and close this stream.
