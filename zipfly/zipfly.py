@@ -15,7 +15,10 @@ class ZipFly:
                  compression = zipfile.ZIP_STORED,
                  allowZip64 = True,
                  compresslevel = None,
-                 storesize = 0):
+                 storesize = 0,
+                 filesystem = 'fs',
+                 arcname = 'n',
+                 encode = 'utf-8',):
 
         """
         @param store size : int : size of all files
@@ -35,14 +38,14 @@ class ZipFly:
         self.comment = f'Written using Zipfly v{__version__}'
         self.mode = mode
         self.paths = paths
-        self.filesystem = 'fs'
-        self.arcname = 'n'
+        self.filesystem = filesystem
+        self.arcname = arcname
         self.chunksize = int(chunksize)
         self.compression = compression
         self.allowZip64 = allowZip64
         self.compresslevel = compresslevel
         self.storesize = storesize
-        self.encode = 'utf-8'
+        self.encode = encode
         self.ezs = 0x8e # empty zip size in bytes
 
     def set_comment(self, comment):
@@ -159,7 +162,10 @@ class ZipFly:
             for path in self.paths:
 
                 if not self.filesystem in path:
-                    raise RuntimeError(" 'fs' key is required ")
+
+                    raise RuntimeError(
+                        f" '{self.filesystem}' key is required "
+                    )
 
                 """
                 filesystem should be the path to a file or directory on the filesystem.
