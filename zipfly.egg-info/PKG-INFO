@@ -1,12 +1,12 @@
 Metadata-Version: 2.1
 Name: zipfly
-Version: 5.0.4
+Version: 5.0.5
 Summary: ZipFly
 Home-page: http://github.com/buzonIO/zipfly
 Author: Buzon
 Author-email: support@buzon.io
 License: UNKNOWN
-Download-URL: https://github.com/BuzonIO/zipfly/archive/v5.0.4.tar.gz
+Download-URL: https://github.com/BuzonIO/zipfly/archive/v5.0.5.tar.gz
 Description: [![Build Status](https://travis-ci.com/BuzonIO/zipfly.svg?branch=master)](https://travis-ci.com/BuzonIO/zipfly)
         ![GitHub release (latest by date)](https://img.shields.io/github/v/release/buzonio/zipfly)
         [![Downloads](https://pepy.tech/badge/zipfly)](https://pepy.tech/project/zipfly)
@@ -41,7 +41,7 @@ Description: [![Build Status](https://travis-ci.com/BuzonIO/zipfly.svg?branch=ma
         
         |                   |.                          
         |----------------   |-------------------------------      
-        |**fs**             |Should be the path to a file or directory on the filesystem            
+        |**fs**             |Should be the path to a file on the filesystem            
         |**n** *(Optional)* |Is the name which it will have within the archive <br> (by default, this will be the same as **fs**)
         
         <br>

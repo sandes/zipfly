@@ -5,7 +5,9 @@ zipfly/__init__.py
 zipfly/api.py
 zipfly/compat.py
 zipfly/response.py
+zipfly/stream.py
 zipfly/test.py
+zipfly/version.py
 zipfly/zipfly.py
 zipfly.egg-info/PKG-INFO
 zipfly.egg-info/SOURCES.txt
