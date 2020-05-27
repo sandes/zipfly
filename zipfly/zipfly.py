@@ -113,70 +113,67 @@ class ZipFly:
 
     def buffer_prediction_size(self):
 
-        '''
-        BufferPredictionSize.
-        :var    hexadecimal     LIZO:     Initial length for one file
-        :var    hexadecimal     LIZM:     Initial length for multiples files (null for one file)
-        :var    hexadecimal     COMM:     Comment length in bytes set to 26 bytes (magic number)
+        if not self.allowZip64:
+            raise RuntimeError("ZIP64 extensions required")
 
-        Initialize a Buffer
-        :arg    integer     pfbs:           Buffer variable to return
-        :arg    integer     storesize:      Initial storesize
-        :arg    bytes       comment:        Buffer comment zip file
 
-        getting bytes from character in UTF-8 format
-        example:
-            1) 'a' has 1 byte in utf-8 format ( b'a' )
-            2) 'ñ' has 2 bytes in utf-8 format ( b'\xc3\xb1' )
-            3) '传' has 3 bytes in utf-8 format ( b'\xe4\xbc\xa0' )
-        '''
+        # End of Central Directory Record
+        EOCD = int( 0x16 )
 
-        # initial values
-        _len = len( self.paths )
-        _len_utf8 = int( 0x2 ) * _len
+        LEN_PATHS = len( self.paths )
+        FILE_OFFSET = int( 0x5e ) * LEN_PATHS
 
-        LIZO = int( 0x8e ) * _len
-        LIZM = int( 0x30 ) * ( _len - 1 )
-
-        # comment
         tmp_comment = self.comment
         if isinstance(self.comment, bytes):
             tmp_comment = ( self.comment ).decode()
 
-        COMM = int( 0x1a )
-        tmp_s = 0
-        for c in tmp_comment:
-            tmp_s += len( c.encode(self.encode) )
-        COMM = tmp_s - COMM
+        size_comment = len(tmp_comment.encode( self.encode ))
 
-        # files names
-        bt = 0
-        for path in self.paths:
-            tmp_bt = 0
+        # path-name
 
+        size_paths = 0
+        #for path in self.paths:
+        for idx in range( LEN_PATHS ):
+
+            '''
+            getting bytes from character in UTF-8 format
+            example:
+            1) 'a' has 1 byte in utf-8 format ( b'a' )
+            2) 'ñ' has 2 bytes in utf-8 format ( b'\xc3\xb1' )
+            3) '传' has 3 bytes in utf-8 format ( b'\xe4\xbc\xa0' )
+            '''
+
+            #path = paths[idx]
             name = self.arcname
-            if not self.arcname in path:
+            if not self.arcname in self.paths[idx]:
                 name = self.filesystem
 
-            tmp_name = path[name]
+            tmp_name = self.paths[idx][name]
             if (tmp_name)[0] in ('/', ):
+
                 # is dir then trunk
                 tmp_name = (tmp_name)[ 1 : len( tmp_name ) ]
 
-            for c in tmp_name:
-                tmp_bt += len( c.encode(self.encode) ) * int( 0x2 )
+            size_paths += (
+                len(
+                    tmp_name.encode( self.encode )
+                ) - 1
+            ) * int( 0x2 )
 
-            bt += tmp_bt
+        # zipsize
+        zs = sum([
+            EOCD,
+            FILE_OFFSET,
+            size_comment,
+            size_paths,
+            self.storesize,
+        ])
 
-        # current process size
-        pfbs = (
-            bt + COMM + self.storesize
-        )
+        if zs > 2 * ( 1024 ** 3 ):
+            raise ValueError("Prediction size for zip file greater than 2 GB not supported")
 
-        # simple arithmetic
-        return int(
-            LIZO - LIZM + pfbs -  _len_utf8
-        )
+        return zs
+
 
     def generator(self):
 
