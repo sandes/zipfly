@@ -16,7 +16,7 @@ Python 3.6+
 # Basic usage, compress on-the-fly during writes
 Basic use case is compressing on the fly. Some data will be buffered by the zipfile deflater, but memory inflation is going to be very constrained. Data will be written to destination at fairly regular intervals.
 
-`ZipFly` defaults arguments:<br>    
+`ZipFly` defaults attributes:<br>    
 - <b>paths:</b> [ ] <br/>
 - <b>mode:</b> (write) w <br/>
 - <b>chunksize:</b> (bytes) 16384 <br/>
