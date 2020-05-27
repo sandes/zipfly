@@ -3,7 +3,7 @@
 import io
 import stat
 import zipfile
-__version__ = '6.0.1'
+__version__ = '6.0.2'
 
 class ZipflyStream( io.RawIOBase ):
 
