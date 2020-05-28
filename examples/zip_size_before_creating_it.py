@@ -3,7 +3,7 @@ import os
 
 
 # IMPORTANT:
-# BufferPredictionSize only works with Linux (Xenial)
+# BufferPredictionSize using Linux
 
 paths = [
     {
@@ -29,5 +29,7 @@ zfly = zipfly.ZipFly( paths=paths, storesize=storesize )
 
 
 # zip size before creating it in bytes
-print ( zfly.buffer_prediction_size() )
-
+try:
+    prediction = zfly.buffer_prediction_size()
+except zipfly.LargePredictionSize as e:
+    print (e)
