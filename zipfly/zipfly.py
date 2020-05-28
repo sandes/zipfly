@@ -1,11 +1,18 @@
 # -*- coding: utf-8 -*-
+__version__ = '6.0.3'
 
 import io
 import stat
 import zipfile
-__version__ = '6.0.2'
 
-class ZipflyStream( io.RawIOBase ):
+ZIP64_LIMIT = (1 << 31) + 1
+
+class LargePredictionSize(Exception):
+    """
+    Raised when Buffer is larger than ZIP64
+    """
+
+class ZipflyStream(io.RawIOBase):
 
     """
     The RawIOBase ABC extends IOBase. It deals with
@@ -41,7 +48,7 @@ class ZipFly:
     def __init__(self,
                  mode = 'w',
                  paths = [],
-                 chunksize = 0x4000,
+                 chunksize = '0x4000',
                  compression = zipfile.ZIP_STORED,
                  allowZip64 = True,
                  compresslevel = None,
@@ -70,13 +77,13 @@ class ZipFly:
         self.paths = paths
         self.filesystem = filesystem
         self.arcname = arcname
-        self.chunksize = int(chunksize)
+        self.chunksize = int(chunksize, 16)
         self.compression = compression
         self.allowZip64 = allowZip64
         self.compresslevel = compresslevel
         self.storesize = storesize
         self.encode = encode
-        self.ezs = 0x8e # empty zip size in bytes
+        self.ezs = int('0x8e', 16) # empty zip size in bytes
 
     def set_comment(self, comment):
 
@@ -118,10 +125,10 @@ class ZipFly:
 
 
         # End of Central Directory Record
-        EOCD = int( 0x16 )
+        EOCD = int('0x16', 16)
 
         LEN_PATHS = len( self.paths )
-        FILE_OFFSET = int( 0x5e ) * LEN_PATHS
+        FILE_OFFSET = int('0x5e', 16) * LEN_PATHS
 
         tmp_comment = self.comment
         if isinstance(self.comment, bytes):
@@ -157,8 +164,8 @@ class ZipFly:
             size_paths += (
                 len(
                     tmp_name.encode( self.encode )
-                ) - 1
-            ) * int( 0x2 )
+                ) - int( '0x1', 16)
+            ) * int('0x2', 16)
 
         # zipsize
         zs = sum([
@@ -169,8 +176,8 @@ class ZipFly:
             self.storesize,
         ])
 
-        if zs > 2 * ( 1024 ** 3 ):
-            raise ValueError("Prediction size for zip file greater than 2 GB not supported")
+        if zs > ZIP64_LIMIT:
+            raise LargePredictionSize("Prediction size for zip file greater than 2 GB not supported")
 
         return zs
 
