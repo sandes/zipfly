@@ -80,7 +80,9 @@ Your own comment in the zip file
 # Maintainer
 Santiago Debus <a href="http://santiagodebus.com/" target="_blank">(@santiagodebus.com)</a><br>
 
-<i>Do you need Santiago's help?: santidebus@gmail.com </i><br>
+<i>Do you need Santiago's help?<br>
+
+<a href="mailto:santidebus@gmail.com" target="_blank">Email</a> <br>
 <a href="http://santiagodebus.com/" target="_blank">Web</a> <br>
 <a href="https://stackoverflow.com/users/5302440/sandes " target="_blank">Stackoverflow</a><br>
 <a href="https://twitter.com/santidebus/" target="_blank">Twitter</a><br>
