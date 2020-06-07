@@ -80,7 +80,6 @@ Your own comment in the zip file
 # Maintainer
 Santiago Debus <a href="http://santiagodebus.com/" target="_blank">(@santiagodebus.com)</a><br>
 
-<i>Santiago is CEO & Founder of Grow HQ, Inc. and Buzon, Inc.</i> <br>
 <i>Do you need Santiago's help?: santidebus@gmail.com </i>
 
 # License
