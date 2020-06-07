@@ -80,7 +80,8 @@ Your own comment in the zip file
 # Maintainer
 Santiago Debus <a href="http://santiagodebus.com/" target="_blank">(@santiagodebus.com)</a><br>
 
-<i>Santiago's open-source projects are supported by his Patreon. If you found this project helpful, any monetary contributions to the Patreon are appreciated and will be put to good creative use.</i>
+<i>Santiago is CEO & Founder of Grow HQ, Inc. and Buzon, Inc.</i>
+<i>Job offers: santidebus@gmail.com</i>
 
 # License
 This library was created by Buzon.io and is released under the MIT. Copyright 2020 Grow HQ, Inc.
