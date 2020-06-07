@@ -81,7 +81,7 @@ Your own comment in the zip file
 Santiago Debus <a href="http://santiagodebus.com/" target="_blank">(@santiagodebus.com)</a><br>
 
 <i>Santiago is CEO & Founder of Grow HQ, Inc. and Buzon, Inc.</i> <br>
-<i>Job offers: santidebus@gmail.com</i>
+<i>Do you need Santiago's help?: santidebus@gmail.com </i>
 
 # License
 This library was created by Buzon.io and is released under the MIT. Copyright 2020 Grow HQ, Inc.
