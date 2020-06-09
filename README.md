@@ -47,7 +47,7 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
         },
     ]
 
-    zfly = zipfly.ZipFly( paths = paths )
+    zfly = zipfly.ZipFly(paths = paths)
 
     generator = zfly.generator()
     print (generator)
