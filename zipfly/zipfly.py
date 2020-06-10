@@ -126,9 +126,7 @@ class ZipFly:
 
         # End of Central Directory Record
         EOCD = int('0x16', 16)
-
-        LEN_PATHS = len( self.paths )
-        FILE_OFFSET = int('0x5e', 16) * LEN_PATHS
+        FILE_OFFSET = int('0x5e', 16) * len(self.paths)
 
         tmp_comment = self.comment
         if isinstance(self.comment, bytes):
@@ -140,7 +138,7 @@ class ZipFly:
 
         size_paths = 0
         #for path in self.paths:
-        for idx in range( LEN_PATHS ):
+        for idx in range(len(self.paths)):
 
             '''
             getting bytes from character in UTF-8 format
