@@ -82,4 +82,4 @@ Santiago Debus <a href="http://santiagodebus.com/" target="_blank">(@santiagodeb
 
 
 # License
-This library was created by Buzon.io and is released under the MIT. Copyright 2020 Grow HQ, Inc.
+This library was created by Buzon.io and is released under the MIT. Copyright 2020 Buzon, Inc.
