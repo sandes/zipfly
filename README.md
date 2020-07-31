@@ -5,7 +5,7 @@
 # Buzon - ZipFly
 
 ZipFly is a zip archive generator based on zipfile.py.
-It was created by <a href="https://buzon.io" target="_blank">Buzon.io</a> to generate very large ZIP archives for immediate sending out to clients, or for writing large ZIP archives without memory inflation.
+It was created by <a href="https://buzon.io" target="blank">Buzon.io</a> to generate very large ZIP archives for immediate sending out to clients, or for writing large ZIP archives without memory inflation.
 
 # Requirements
 Python 3.6+
