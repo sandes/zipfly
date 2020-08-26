@@ -24,6 +24,7 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 - <b>allowZip64:</b> True <br/>
 - <b>compresslevel:</b> None <br/>
 - <b>storesize:</b> (bytes) 0 <br/>
+- <b>encode:</b> utf-8 <br/>
 
 
 <br/>
