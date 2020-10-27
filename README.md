@@ -26,9 +26,6 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 - <b>storesize:</b> (bytes) 0 <br/>
 - <b>encode:</b> utf-8 <br/>
 
-NOTE:
-with a small chunksize, you can see from looking at just the outgoing  requests that you're reading  your object storage many times, wasting bandwidth and CPU
-chunksize='0x100000'
 <br/>
 
 
