@@ -19,7 +19,7 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 `ZipFly` defaults attributes:<br>    
 - <b>paths:</b> [ ] <br/>
 - <b>mode:</b> (write) w <br/>
-- <b>chunksize:</b> (bytes) 16384 <br/>
+- <b>chunksize:</b> (hex) '0x4000'<br/>
 - <b>compression:</b> Stored <br/>
 - <b>allowZip64:</b> True <br/>
 - <b>compresslevel:</b> None <br/>
