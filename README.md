@@ -19,15 +19,20 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 `ZipFly` defaults attributes:<br>    
 - <b>paths:</b> [ ] <br/>
 - <b>mode:</b> (write) w <br/>
-- <b>chunksize:</b> (hex) '0x4000'<br/>
+- <b>chunksize:</b> (hex) '0x4000'<br/> *
 - <b>compression:</b> Stored <br/>
 - <b>allowZip64:</b> True <br/>
 - <b>compresslevel:</b> None <br/>
 - <b>storesize:</b> (bytes) 0 <br/>
 - <b>encode:</b> utf-8 <br/>
 
-
+NOTE:
+with a small chunksize, you can see from looking at just the outgoing  requests that you're reading  your object storage many times, wasting bandwidth and CPU
+chunksize='0x100000'
 <br/>
+
+
+
 
 `paths` <b>list of dictionaries:</b>
 
@@ -60,6 +65,11 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
             f.write(i)
 
 ```
+
+<i>Note for Streaming:  </i>
+With a small chunksize, you can see from looking at just the outgoing  requests that you're reading  your object storage many times, wasting bandwidth and CPU.
+Change this in your ZipFly constructor. For 1MB  set `chunksize='0x100000'`
+
 # Examples
 
 > <b>Streaming multiple files in a zip with Django or Flask</b>
