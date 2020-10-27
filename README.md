@@ -63,9 +63,6 @@ Basic use case is compressing on the fly. Some data will be buffered by the zipf
 
 ```
 
-<i>Note for Streaming:  </i>
-With a small chunksize, you can see from looking at just the outgoing  requests that you're reading  your object storage many times, wasting bandwidth and CPU.
-Change this in your ZipFly constructor. For 1MB  set `chunksize='0x100000'`
 
 # Examples
 
