@@ -48,7 +48,7 @@ class ZipFly:
     def __init__(self,
                  mode = 'w',
                  paths = [],
-                 chunksize = '0x4000',
+                 chunksize = 0x8000,
                  compression = zipfile.ZIP_STORED,
                  allowZip64 = True,
                  compresslevel = None,
@@ -71,14 +71,18 @@ class ZipFly:
         if compresslevel not in (None, ):
             raise RuntimeError("Not compression level supported")
 
+        if isinstance(chunksize, str):
+            chunksize = int(chunksize, 16)
+
+
 
         self.comment = f'Written using Zipfly v{__version__}'
         self.mode = mode
         self.paths = paths
         self.filesystem = filesystem
         self.arcname = arcname
-        self.chunksize = int(chunksize, 16)
         self.compression = compression
+        self.chunksize = chunksize
         self.allowZip64 = allowZip64
         self.compresslevel = compresslevel
         self.storesize = storesize
@@ -175,7 +179,9 @@ class ZipFly:
         ])
 
         if zs > ZIP64_LIMIT:
-            raise LargePredictionSize("Prediction size for zip file greater than 2 GB not supported")
+            raise LargePredictionSize(
+                "Prediction size for zip file greater than 2 GB not supported"
+            )
 
         return zs
 
@@ -219,6 +225,28 @@ class ZipFly:
                     # Read from filesystem:
 
                     with zf.open( z_info, mode = self.mode ) as d:
+
+                        """
+                        buffer = b''
+                        while True:
+
+                            chunk = e.read(self.chunksize)
+                            if not chunk:
+                                break
+
+                            buffer += chunk
+                            elements = buffer.split(b'\0')
+
+                            for element in elements[:-1]:
+                                d.write( element )
+                                yield stream.get()
+
+                            buffer = elements[-1]
+
+                        if buffer:
+                            # d.write( buffer )
+                            yield stream.get()
+                        """
 
                         for chunk in iter( lambda: e.read( self.chunksize ), b'' ):
 
