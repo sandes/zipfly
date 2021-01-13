@@ -14,7 +14,7 @@ Python 3.6+
     pip3 install zipfly
 
 # Basic usage, compress on-the-fly during writes
-Using this library will save you from having to write the Zip to disk. Some data will be buffered by the zipfile deflater, but memory inflation is going to be very constrained. Data will be written to destination by default at regular ~32KB intervals.
+Using this library will save you from having to write the Zip to disk. Some data will be buffered by the zipfile deflater, but memory inflation is going to be very constrained. Data will be written to destination by default at regular 32KB intervals.
 
 
 `ZipFly` defaults attributes:<br>    
@@ -87,4 +87,4 @@ Santiago Debus <a href="http://santiagodebus.com/" target="_blank">(@santiagodeb
 
 
 # License
-This library was created by Buzon.io and is released under the MIT. Copyright 2021 Buzon, Inc.
+This library was created by Buzon.io and is released under the MIT. Copyright 2021 Cardallot, Inc.
