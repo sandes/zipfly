@@ -19,6 +19,8 @@ if CURRENT_PYTHON < REQUIRED_PYTHON:
         understand the python_requires classifier""".format(*(REQUIRED_PYTHON + CURRENT_PYTHON)))
     sys.exit(1)
 
+# 3.9
+
 setup(
     name='zipfly',
     packages=['zipfly'],
