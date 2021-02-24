@@ -1,7 +1,7 @@
 from setuptools import setup
 import sys
 import os
-__version__ = '6.0.3'
+__version__ = '6.0.4'
 
 CURRENT_PYTHON = sys.version_info[:2]
 REQUIRED_PYTHON = (3,6)
@@ -40,5 +40,6 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
     ],
 )
