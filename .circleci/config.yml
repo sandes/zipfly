@@ -23,9 +23,6 @@ jobs:
     # The executor is the environment in which the steps below will be executed - below will use a python 3.9 container
     # Change the version below to your required version of python
     docker:
-      - image: cimg/python:3.6
-      - image: cimg/python:3.7
-      - image: cimg/python:3.8
       - image: cimg/python:3.9
     # Checkout the code as the first step. This is a dedicated CircleCI step.
     # The python orb's install-packages step will install the dependencies from a Pipfile via Pipenv by default.
