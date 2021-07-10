@@ -148,9 +148,7 @@ class ZipFly:
             '''
             getting bytes from character in UTF-8 format
             example:
-            1) 'a' has 1 byte in utf-8 format ( b'a' )
-            2) 'ñ' has 2 bytes in utf-8 format ( b'\xc3\xb1' )
-            3) '传' has 3 bytes in utf-8 format ( b'\xe4\xbc\xa0' )
+            '传' has 3 bytes in utf-8 format ( b'\xe4\xbc\xa0' )
             '''
 
             #path = paths[idx]
@@ -206,12 +204,6 @@ class ZipFly:
                         f" '{self.filesystem}' key is required "
                     )
 
-                """
-                filesystem should be the path to a file or directory on the filesystem.
-                arcname is the name which it will have within the archive (by default,
-                this will be the same as filename
-                """
-
                 if not self.arcname in path:
 
                     # arcname will be default path
@@ -226,28 +218,6 @@ class ZipFly:
                     # Read from filesystem:
 
                     with zf.open( z_info, mode = self.mode ) as d:
-
-                        """
-                        buffer = b''
-                        while True:
-
-                            chunk = e.read(self.chunksize)
-                            if not chunk:
-                                break
-
-                            buffer += chunk
-                            elements = buffer.split(b'\0')
-
-                            for element in elements[:-1]:
-                                d.write( element )
-                                yield stream.get()
-
-                            buffer = elements[-1]
-
-                        if buffer:
-                            # d.write( buffer )
-                            yield stream.get()
-                        """
 
                         for chunk in iter( lambda: e.read( self.chunksize ), b'' ):
 
