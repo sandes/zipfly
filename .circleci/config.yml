@@ -35,7 +35,4 @@ jobs:
       - run:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
-          command: pytest
-
-script:
-  - "python zipfly/test.py"
+          command: "python zipfly/test.py"
