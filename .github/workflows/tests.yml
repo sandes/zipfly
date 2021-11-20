@@ -1,0 +1,42 @@
+name: Tests
+
+on:
+  pull_request:
+    paths-ignore:
+      - 'dist/**'
+  push:
+    paths-ignore:
+      - 'dist/**'
+
+jobs:
+  tests:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version:
+        - '3.6'
+        - '3.7'
+        - '3.8'
+        - '3.9'
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('requirements/*.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Upgrade packaging tools
+      run: python -m pip install --upgrade pip setuptools virtualenv wheel
+
+    - name: Run tests for ${{ matrix.python-version }}
+      run: python -m unittest
