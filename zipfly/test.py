@@ -81,9 +81,8 @@ class TestBufferPredictionSize(unittest.TestCase):
 
                 storesize = 0
                 for path in paths1:
-                    f = open(path['fs'], 'rb')
-                    storesize += os.fstat(f.fileno()).st_size
-                    f.close()
+                    with open(path['fs'], 'rb') as f:
+                        storesize += os.fstat(f.fileno()).st_size
 
                 zfly = zipfly.ZipFly( paths = paths1, storesize = storesize )
 
@@ -110,6 +109,9 @@ class TestBufferPredictionSize(unittest.TestCase):
                 )
 
                 self.assertEqual(zs,ps)
+
+                # Cleanup if test was successful
+                os.remove("test{}.zip".format(test_n))
 
 
 if __name__ == '__main__':
