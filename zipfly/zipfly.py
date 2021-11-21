@@ -250,32 +250,8 @@ class ZipFly:
                         # Read from filesystem:
 
                         with zf.open( z_info, mode = self.mode ) as d:
-                            """
-                            buffer = b''
-                            while True:
-
-                                chunk = e.read(self.chunksize)
-                                if not chunk:
-                                    break
-
-                                buffer += chunk
-                                elements = buffer.split(b'\0')
-
-                                for element in elements[:-1]:
-                                    d.write( element )
-                                    yield stream.get()
-
-                                buffer = elements[-1]
-
-                            if buffer:
-                                # d.write( buffer )
-                                yield stream.get()
-                            """
 
                             for chunk in iter( lambda: e.read( self.chunksize ), b'' ):
-
-                                # (e.read( ... )) this get a small chunk of the file
-                                # and return a callback to the next iterator
 
                                 d.write( chunk )
                                 yield stream.get()
