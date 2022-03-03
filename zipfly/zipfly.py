@@ -4,7 +4,6 @@ __version__ = '6.0.4'
 
 import io
 import stat
-import time
 import zipfile
 
 ZIP64_LIMIT = (1 << 31) + 1
@@ -57,9 +56,7 @@ class ZipFly:
                  storesize = 0,
                  filesystem = 'fs',
                  arcname = 'n',
-                 encode = 'utf-8',
-                 buffer = 'b',
-                 date_time = 'dt',):
+                 encode = 'utf-8',):
 
         """
         @param store size : int : size of all files
@@ -84,8 +81,6 @@ class ZipFly:
         self.mode = mode
         self.paths = paths
         self.filesystem = filesystem
-        self.buffer = buffer
-        self.date_time = date_time
         self.arcname = arcname
         self.compression = compression
         self.chunksize = chunksize
@@ -156,9 +151,6 @@ class ZipFly:
             '传' has 3 bytes in utf-8 format ( b'\xe4\xbc\xa0' )
             '''
 
-            if self.buffer in self.paths[idx]:
-                raise RuntimeError(f"Buffer prediction does not work if a path contains the key '{self.buffers}' ")
-
             #path = paths[idx]
             name = self.arcname
             if not self.arcname in self.paths[idx]:
@@ -206,65 +198,61 @@ class ZipFly:
 
             for path in self.paths:
 
-                if not self.filesystem in path and not self.buffer in path:
+                if not self.filesystem in path:
 
                     raise RuntimeError(
-                        f" '{self.filesystem}' or '{self.buffer}' key is required "
-                    )
-
-                if self.filesystem in path and self.buffer in path:
-
-                    raise RuntimeError(
-                        f"Only on of '{self.filesystem}' or '{self.buffer}' may be provided "
-                    )
-
-                if self.filesystem in path and self.date_time in path:
-                    raise RuntimeError(
-                        f"'{self.date_time}' may only be provided together with '{self.buffer}' "
+                        f" '{self.filesystem}' key is required "
                     )
 
                 """
                 filesystem should be the path to a file or directory on the filesystem.
-                buffer is a filestream, e.g. the return value of `open('filepath', 'rb')`, and may be used instead of filesystem
                 arcname is the name which it will have within the archive (by default,
                 this will be the same as filename
                 """
 
                 if not self.arcname in path:
 
-                    if self.filesystem not in path:
-                        raise RuntimeError(
-                            f"For a buffer '{self.arcname}' is required "
-                        )
-
                     # arcname will be default path
                     path[self.arcname] = path[self.filesystem]
 
-                if self.filesystem in path:
-                    z_info = zipfile.ZipInfo.from_file(
-                        path[self.filesystem],
-                        path[self.arcname]
-                    )
+                z_info = zipfile.ZipInfo.from_file(
+                    path[self.filesystem],
+                    path[self.arcname]
+                )
 
-                    with open( path[self.filesystem], 'rb' ) as e:
-                        # Read from filesystem:
+                with open( path[self.filesystem], 'rb' ) as e:
+                    # Read from filesystem:
 
-                        with zf.open( z_info, mode = self.mode ) as d:
+                    with zf.open( z_info, mode = self.mode ) as d:
 
-                            for chunk in iter( lambda: e.read( self.chunksize ), b'' ):
+                        """
+                        buffer = b''
+                        while True:
 
-                                d.write( chunk )
+                            chunk = e.read(self.chunksize)
+                            if not chunk:
+                                break
+
+                            buffer += chunk
+                            elements = buffer.split(b'\0')
+
+                            for element in elements[:-1]:
+                                d.write( element )
                                 yield stream.get()
 
-                else:
-                    if not self.date_time in path:
-                        path[self.date_time] = time.localtime(time.time())[:6]
+                            buffer = elements[-1]
 
-                    z_info = zipfile.ZipInfo(path[self.arcname], path[self.date_time])
-                    with zf.open(z_info, mode=self.mode) as d:
-                        for chunk in iter(lambda: path[self.buffer].read(self.chunksize),
-                                          b''):
-                            d.write(chunk)
+                        if buffer:
+                            # d.write( buffer )
+                            yield stream.get()
+                        """
+
+                        for chunk in iter( lambda: e.read( self.chunksize ), b'' ):
+
+                            # (e.read( ... )) this get a small chunk of the file
+                            # and return a callback to the next iterator
+
+                            d.write( chunk )
                             yield stream.get()
 
 
