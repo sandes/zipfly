@@ -64,30 +64,6 @@ for dirpath, dnames, fnames in os.walk(p3):
             }
         )
 
-class TestBufferInput(unittest.TestCase):
-    def test_buffer_input(self):
-        for test_n in range(1, 2):
-            assert paths1, 'Test does not work without sample files. Change dir and run tests again.'
-
-
-            def buffer_path_generator():
-                for path in paths1:
-                    with open(path['fs'], 'rb') as file:
-                        yield {
-                            'b': file,
-                            'n': '/testcontent' + path['n']
-                        }
-
-            zfly = zipfly.ZipFly(paths=buffer_path_generator())
-            zfly.generator()
-
-            with open("buffer-test{}.zip".format(test_n), "wb") as f:
-                for i in zfly.generator():
-                    f.write(i)
-
-            # Cleanup if test was successful
-            os.remove("buffer-test{}.zip".format(test_n))
-
 class TestBufferPredictionSize(unittest.TestCase):
 
     def test_buffer_prediction_size(self):
@@ -105,8 +81,9 @@ class TestBufferPredictionSize(unittest.TestCase):
 
                 storesize = 0
                 for path in paths1:
-                    with open(path['fs'], 'rb') as f:
-                        storesize += os.fstat(f.fileno()).st_size
+                    f = open(path['fs'], 'rb')
+                    storesize += os.fstat(f.fileno()).st_size
+                    f.close()
 
                 zfly = zipfly.ZipFly( paths = paths1, storesize = storesize )
 
@@ -133,9 +110,6 @@ class TestBufferPredictionSize(unittest.TestCase):
                 )
 
                 self.assertEqual(zs,ps)
-
-                # Cleanup if test was successful
-                os.remove("test{}.zip".format(test_n))
 
 
 if __name__ == '__main__':
