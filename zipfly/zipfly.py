@@ -162,20 +162,10 @@ class ZipFly:
                 # is dir then trunk
                 tmp_name = (tmp_name)[ 1 : len( tmp_name ) ]
 
-            size_paths += (
-                len(
-                    tmp_name.encode( self.encode )
-                ) - int( '0x1', 16)
-            ) * int('0x2', 16)
+            size_paths += (len(tmp_name.encode( self.encode )) - int( '0x1', 16)) * int('0x2', 16)
 
         # zipsize
-        zs = sum([
-            EOCD,
-            FILE_OFFSET,
-            size_comment,
-            size_paths,
-            self.storesize,
-        ])
+        zs = sum([EOCD,FILE_OFFSET,size_comment,size_paths,self.storesize,])
 
         if zs > ZIP64_LIMIT:
             raise LargePredictionSize(
@@ -222,35 +212,9 @@ class ZipFly:
 
                 with open( path[self.filesystem], 'rb' ) as e:
                     # Read from filesystem:
-
                     with zf.open( z_info, mode = self.mode ) as d:
 
-                        """
-                        buffer = b''
-                        while True:
-
-                            chunk = e.read(self.chunksize)
-                            if not chunk:
-                                break
-
-                            buffer += chunk
-                            elements = buffer.split(b'\0')
-
-                            for element in elements[:-1]:
-                                d.write( element )
-                                yield stream.get()
-
-                            buffer = elements[-1]
-
-                        if buffer:
-                            # d.write( buffer )
-                            yield stream.get()
-                        """
-
                         for chunk in iter( lambda: e.read( self.chunksize ), b'' ):
-
-                            # (e.read( ... )) this get a small chunk of the file
-                            # and return a callback to the next iterator
 
                             d.write( chunk )
                             yield stream.get()
