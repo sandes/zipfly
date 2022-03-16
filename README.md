@@ -1,6 +1,6 @@
 [![Build Status](https://img.shields.io/circleci/build/github/BuzonIO/zipfly/master)](https://app.circleci.com/pipelines/github/BuzonIO/zipfly)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/buzonio/zipfly)
-[![Downloads](https://pepy.tech/badge/zipfly)](https://pepy.tech/project/zipfly)
+[![Downloads](https://img.shields.io/pypi/dm/zipfly)](https://img.shields.io/pypi/dm/zipfly)
 
 # Buzon - ZipFly
 
