@@ -2,7 +2,7 @@
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/buzonio/zipfly)
 [![Downloads](https://img.shields.io/pypi/dm/zipfly)](https://img.shields.io/pypi/dm/zipfly)
 
-# Buzon - ZipFly
+# ZipFly
 
 ZipFly is a zip archive generator based on zipfile.py.
 It was created by <a href="https://santiagodebus.com" target="blank">Santiago Debus</a> to generate very large ZIP archives for immediate sending out to clients, or for writing large ZIP archives without memory inflation.
