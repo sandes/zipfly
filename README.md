@@ -66,7 +66,7 @@ Using this library will save you from having to write the Zip to disk. Some data
 
 # Examples
 
-> <b>Streaming multiple files in a zip with Django or Flask</b>
+> <b>Streaming multiple files in a zip with <a href="https://github.com/sandes/zipfly/blob/master/examples/streaming_django.py" target="_blank">Django</a> or <a href="https://github.com/sandes/zipfly/blob/master/examples/streaming_flask.py" target="_blank">Flask</a></b>
 Send forth large files to clients with the most popular frameworks
 
 > <b>Create paths</b>
