@@ -223,7 +223,6 @@ class ZipFly:
             self.set_comment(self.comment)
             zf.comment = self.comment
 
-        # last chunk
         yield stream.get()
 
         # (TESTING)
