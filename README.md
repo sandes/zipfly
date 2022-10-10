@@ -5,7 +5,7 @@
 # ZipFly
 
 ZipFly is a zip archive generator based on zipfile.py.
-It was created by <a href="https://santiagodebus.com" target="blank">Santiago Debus</a> to generate very large ZIP archives for immediate sending out to clients, or for writing large ZIP archives without memory inflation.
+It was created to generate very large ZIP archives for immediate sending out to clients, or for writing large ZIP archives without memory inflation.
 
 # Requirements
 Python 3.6+ Added <a href="https://docs.python.org/3/library/zipfile.html#zipfile-objects" target="blank">support</a> for writing to unseekable streams.
@@ -82,9 +82,3 @@ Efficient way to read a single very large binary file in python
 Your own comment in the zip file
 
 
-# Maintainer
-Santiago Debus <a href="http://santiagodebus.com/" target="_blank">(@santiagodebus.com)</a><br>
-
-
-# License
-This library was created by Buzon.io and is released under the MIT. Copyright 2021 Cardallot, Inc.
