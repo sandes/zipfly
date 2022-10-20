@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__version__ = '6.0.4'
+__version__ = '6.0.5'
 # v
 
 import io
@@ -190,9 +190,7 @@ class ZipFly:
 
                 if not self.filesystem in path:
 
-                    raise RuntimeError(
-                        f" '{self.filesystem}' key is required "
-                    )
+                    raise RuntimeError(f"'{self.filesystem}' key is required")
 
                 """
                 filesystem should be the path to a file or directory on the filesystem.
@@ -212,11 +210,11 @@ class ZipFly:
 
                 with open( path[self.filesystem], 'rb' ) as e:
                     # Read from filesystem:
-                    with zf.open( z_info, mode = self.mode ) as d:
+                    with zf.open( z_info, mode=self.mode ) as d:
 
-                        for chunk in iter( lambda: e.read( self.chunksize ), b'' ):
+                        for chunk in iter( lambda: e.read(self.chunksize), b'' ):
 
-                            d.write( chunk )
+                            d.write(chunk)
                             yield stream.get()
 
 
@@ -224,9 +222,6 @@ class ZipFly:
             zf.comment = self.comment
 
         yield stream.get()
-
-        # (TESTING)
-        # get the real size of the zipfile
         self._buffer_size = stream.size()
 
         # Flush and close this stream.
