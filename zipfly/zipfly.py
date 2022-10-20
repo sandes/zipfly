@@ -3,6 +3,7 @@ __version__ = '6.0.4'
 # v
 
 import io
+import stat
 import zipfile
 
 ZIP64_LIMIT = (1 << 31) + 1
@@ -47,7 +48,7 @@ class ZipFly:
 
     def __init__(self,
                  mode = 'w',
-                 paths = None,
+                 paths = [],
                  chunksize = 0x8000,
                  compression = zipfile.ZIP_STORED,
                  allowZip64 = True,
@@ -55,15 +56,12 @@ class ZipFly:
                  storesize = 0,
                  filesystem = 'fs',
                  arcname = 'n',
-                 content_kw = 'content',
                  encode = 'utf-8',):
 
         """
         @param store size : int : size of all files
         in paths without compression
         """
-        if paths is None:
-            paths = []
 
         if mode not in ('w',):
             raise RuntimeError("ZipFly requires 'w' mode")
@@ -91,8 +89,6 @@ class ZipFly:
         self.storesize = storesize
         self.encode = encode
         self.ezs = int('0x8e', 16) # empty zip size in bytes
-        self.content_kw = content_kw
-
 
     def set_comment(self, comment):
 
@@ -191,35 +187,36 @@ class ZipFly:
             allowZip64 = self.allowZip64,) as zf:
 
             for path in self.paths:
+
+                if not self.filesystem in path:
+
+                    raise RuntimeError(
+                        f" '{self.filesystem}' key is required "
+                    )
+
                 """
                 filesystem should be the path to a file or directory on the filesystem.
                 arcname is the name which it will have within the archive (by default,
                 this will be the same as filename
-                content_kw should be file-like object that could be written in archive instead of filesystem file
                 """
 
-                if self.filesystem in path:
-                    reader = open(path[self.filesystem], 'rb')
-                    z_info = zipfile.ZipInfo.from_file(path[self.filesystem], path[self.arcname])
-                elif self.content_kw in path and self.arcname in path:
-                    reader = path[self.content_kw]
-                    z_info = zipfile.ZipInfo(path[self.arcname])
-                else:
-                    raise RuntimeError(f" '{self.filesystem}' or {self.content_kw} key is required ")
-
                 if not self.arcname in path:
+
                     # arcname will be default path
-                    path[self.arcname] = path.get(self.filesystem)
+                    path[self.arcname] = path[self.filesystem]
 
-                with reader as e:
+                z_info = zipfile.ZipInfo.from_file(
+                    path[self.filesystem],
+                    path[self.arcname]
+                )
+
+                with open( path[self.filesystem], 'rb' ) as e:
                     # Read from filesystem:
+                    with zf.open( z_info, mode = self.mode ) as d:
 
-                    with zf.open(z_info, mode=self.mode) as d:
-                        for chunk in iter(lambda: e.read(self.chunksize), b''):
-                            # (e.read( ... )) this get a small chunk of the file
-                            # and return a callback to the next iterator
+                        for chunk in iter( lambda: e.read( self.chunksize ), b'' ):
 
-                            d.write(chunk)
+                            d.write( chunk )
                             yield stream.get()
 
 
