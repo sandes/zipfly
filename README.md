@@ -42,24 +42,22 @@ Using this library will save you from having to write the Zip to disk. Some data
 
 ```python
 
-    import zipfly
+    from zipfly import ZipFly
 
     paths = [
         {
             'fs': '/path/to/large/file'
-        },
+        }
     ]
 
-    zfly = zipfly.ZipFly(paths = paths)
+    z = ZipFly(paths=paths)
 
-    generator = zfly.generator()
-    print (generator)
+    print (z.generator()
     # <generator object ZipFly.generator at 0x7f74d52bcc50>
 
-
     with open("large.zip", "wb") as f:
-        for i in generator:
-            f.write(i)
+        for i in z.generator():
+                f.write(i)
 
 ```
 
