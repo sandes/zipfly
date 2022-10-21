@@ -50,14 +50,11 @@ paths = [
     }
 ]
 
-z = ZipFly(paths=paths)
-
-print (z.generator()
-# <generator object ZipFly.generator at 0x7f74d52bcc50>
+zfly = ZipFly(paths=paths)
 
 with open("large.zip", "wb") as f:
-    for i in z.generator():
-            f.write(i)
+    for i in zfly.generator():
+        f.write(i)
 
 ```
 
