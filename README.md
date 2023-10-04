@@ -81,4 +81,5 @@ Efficient way to read a single very large binary file in python
 > <b>Set a comment</b>
 Your own comment in the zip file
 
-
+> <b>Stream files from s3 in a zip file</b>
+Stream files from s3 in a zip file

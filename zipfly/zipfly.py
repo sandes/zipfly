@@ -3,8 +3,9 @@ __version__ = '6.0.5'
 # v
 
 import io
-import stat
+import os
 import zipfile
+
 
 ZIP64_LIMIT = (1 << 31) + 1
 
@@ -56,7 +57,13 @@ class ZipFly:
                  storesize = 0,
                  filesystem = 'fs',
                  arcname = 'n',
-                 encode = 'utf-8',):
+                 encode = 'utf-8',
+
+                 s3_endpoint_url=None,
+                 s3_access_key_id=None,
+                 s3_secret_access_key=None,
+                 s3_bucket=None,
+                ):
 
         """
         @param store size : int : size of all files
@@ -89,6 +96,13 @@ class ZipFly:
         self.storesize = storesize
         self.encode = encode
         self.ezs = int('0x8e', 16) # empty zip size in bytes
+
+        # Cloud
+        # S3
+        self.endpoint_url = s3_endpoint_url
+        self.s3_access_key_id = s3_access_key_id
+        self.s3_secret_access_key = s3_secret_access_key
+        self.s3_bucket = s3_bucket
 
     def set_comment(self, comment):
 
@@ -157,7 +171,7 @@ class ZipFly:
                 name = self.filesystem
 
             tmp_name = self.paths[idx][name]
-            if (tmp_name)[0] in ('/', ):
+            if (tmp_name)[0] in (os.sep, ):
 
                 # is dir then trunk
                 tmp_name = (tmp_name)[ 1 : len( tmp_name ) ]
@@ -203,19 +217,10 @@ class ZipFly:
                     # arcname will be default path
                     path[self.arcname] = path[self.filesystem]
 
-                z_info = zipfile.ZipInfo.from_file(
-                    path[self.filesystem],
-                    path[self.arcname]
-                )
-
-                with open( path[self.filesystem], 'rb' ) as e:
-                    # Read from filesystem:
-                    with zf.open( z_info, mode=self.mode ) as d:
-
-                        for chunk in iter( lambda: e.read(self.chunksize), b'' ):
-
-                            d.write(chunk)
-                            yield stream.get()
+                if os.path.exists(path[self.filesystem]):
+                    yield from self.fs_file_handler(path, zf, stream)
+                elif path[self.filesystem].startswith('s3://'):
+                    yield from self.s3_file_handler(path, zf, stream)
 
 
             self.set_comment(self.comment)
@@ -231,3 +236,50 @@ class ZipFly:
     def get_size(self):
 
         return self._buffer_size
+
+    def fs_file_handler(self, path, zf, stream):
+        z_info = zipfile.ZipInfo.from_file(
+            path[self.filesystem],
+            path[self.arcname]
+        )
+
+        with open( path[self.filesystem], 'rb' ) as e:
+            # Read from filesystem:
+            with zf.open( z_info, mode=self.mode ) as d:
+
+                for chunk in iter( lambda: e.read(self.chunksize), b'' ):
+
+                    d.write(chunk)
+                    yield stream.get()
+
+    def s3_file_handler(self, path, zf, stream):
+        import boto3
+
+        from .zipinfo import CloudZipInfo
+
+
+        s3 = boto3.client(
+            's3',
+            endpoint_url=self.endpoint_url,
+            aws_access_key_id=self.s3_access_key_id,
+            aws_secret_access_key=self.s3_secret_access_key,
+        )
+
+        bucket = self.s3_bucket
+        key = path[self.filesystem].replace(f's3://{bucket}/', '')
+        if self.arcname not in path or path[self.arcname].startswith('s3://'):
+            path[self.arcname] = f"/{key}"
+
+
+        obj = s3.get_object(Bucket=bucket, Key=key)
+        z_info = CloudZipInfo.from_file(
+            path[self.filesystem],
+            path[self.arcname],
+            date_time=obj['LastModified'].timetuple()[:6],
+            st_size=obj['ContentLength'],
+        )
+
+        with zf.open(z_info, mode=self.mode ) as d:
+            for chunk in obj['Body'].iter_chunks(chunk_size=self.chunksize):
+                d.write(chunk)
+                yield stream.get()
