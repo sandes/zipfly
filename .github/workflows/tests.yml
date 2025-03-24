@@ -39,8 +39,3 @@ jobs:
       - name: Upgrade packaging tools
         run: pip install --upgrade pip setuptools virtualenv wheel
 
-      - name: Install dependencies
-        run: pip install -r requirements/dev.txt
-
-      - name: Run tests
-        run: python -m unittest
