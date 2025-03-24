@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/circleci/build/github/sandes/zipfly/master)](https://app.circleci.com/pipelines/github/sandes/zipfly)
+
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/sandes/zipfly)
 [![Downloads](https://static.pepy.tech/badge/zipfly)](https://pepy.tech/project/zipfly)
 
