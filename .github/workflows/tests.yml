@@ -15,28 +15,27 @@ jobs:
 
     strategy:
       matrix:
-        python-version:
-        - '3.7'
-        - '3.8'
-        - '3.9'
-        - '3.10'
+        python-version: [ '3.7', '3.8', '3.9', '3.10' ]
 
     steps:
-    - uses: actions/checkout@v2
+      # Always checkout your repository first
+      - uses: actions/checkout@v2
 
-    - uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
+      # Cache pip packages
+      - name: Cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements/*.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
-    - uses: actions/cache@v2
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('requirements/*.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
+      # Set up the requested Python version
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
 
-    - name: Upgrade packaging tools
-      run: python -m pip install --upgrade pip setuptools virtualenv wheel
+      - name: Upgrade packaging tools
+        run: pip install --upgrade pip setuptools virtualenv wheel
 
-    - name: Run tests for ${{ matrix.python-version }}
-      run: python -m unittest
