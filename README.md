@@ -2,6 +2,7 @@
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/sandes/zipfly)
 [![Downloads](https://static.pepy.tech/badge/zipfly)](https://pepy.tech/project/zipfly)
 
+
 # ZipFly
 
 ZipFly is a zip archive generator based on zipfile.py.
