@@ -74,7 +74,10 @@ class ZipFly:
                  storesize = 0,
                  filesystem = 'fs',
                  arcname = 'n',
-                 encode = 'utf-8',):
+                 encode = 'utf-8',
+                 zip_cls = zipfile.ZipFile,
+                 pwd = None,
+                 **kwargs):
 
         """
         @param store size : int : size of all files
@@ -106,6 +109,13 @@ class ZipFly:
         self.compresslevel = compresslevel
         self.storesize = storesize
         self.encode = encode
+        self.zip_cls = zip_cls
+        self.zip_cls_kwargs = kwargs
+        self.pwd = pwd
+        try:
+            self.zipinfo_cls = self.zip_cls.zipinfo_cls
+        except AttributeError:
+            self.zipinfo_cls = zipfile.ZipInfo
         self.ezs = int('0x8e', 16) # empty zip size in bytes
 
     def set_comment(self, comment):
@@ -199,11 +209,16 @@ class ZipFly:
         stream = ZipflyStream(self.chunksize)
 
         def writer():
-            with zipfile.ZipFile(
+            with self.zip_cls(
                 stream,
                 mode = self.mode,
                 compression = self.compression,
-                allowZip64 = self.allowZip64,) as zf:
+                compresslevel = self.compresslevel,
+                allowZip64 = self.allowZip64,
+                **self.zip_cls_kwargs) as zf:
+
+                if self.pwd:
+                    zf.setpassword(self.pwd)
 
                 for path in self.paths:
 
@@ -222,10 +237,13 @@ class ZipFly:
                         # arcname will be default path
                         path[self.arcname] = path[self.filesystem]
 
-                    z_info = zipfile.ZipInfo.from_file(
+                    z_info = self.zipinfo_cls.from_file(
                         path[self.filesystem],
                         path[self.arcname]
                     )
+                    z_info.compress_type = self.compression
+                    if self.compresslevel is not None:
+                        z_info._compresslevel = self.compresslevel
 
                     with open( path[self.filesystem], 'rb' ) as e:
                         # Read from filesystem:
